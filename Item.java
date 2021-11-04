@@ -3,14 +3,34 @@ public class Item
     //Need to add attributes. Changed name to just Item. Makes more sense and fixed issues elsewhere.
     //private Item item;
 
-    private String itemType()
+    //Added Attributes, Constructor, getters, and setters
+    private String itemName;
+    private ItemType itemType;
+
+    public Item(String itemName, ItemType itemType)
     {
-        return null;
+        this.itemName = itemName;
+        this.itemType = itemType;
     }
 
-    private String itemName()
+    public String getItemName()
     {
-        return null;
+        return itemName;
+    }
+
+    public void setItemName(String itemName)
+    {
+        this.itemName = itemName;
+    }
+
+    public ItemType getItemType()
+    {
+        return itemType;
+    }
+
+    public void setItemType(ItemType itemType)
+    {
+        this.itemType = itemType;
     }
 
     /*
@@ -18,7 +38,7 @@ public class Item
     {
 
     }
-    */
+
 
     public void removeUponUse(Item item)
     {
@@ -29,4 +49,5 @@ public class Item
     {
 
     }
+    */
 }

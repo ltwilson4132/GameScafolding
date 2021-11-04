@@ -24,17 +24,27 @@ import java.util.ArrayList;
 
 public class Monster extends Entity
 {
-    private String enemyType;
+    private MonsterType enemyType;
 
-    public Monster(String enemyType, String entityType, int hp, int def, ArrayList<Item> inventory)
+    public Monster(MonsterType enemyType, int hp, int def, ArrayList<Item> inventory)
     {
-        super(enemyType, hp, def, inventory);
+        super(hp, def, inventory);
         this.enemyType = enemyType;
     }
 
     public String MonsterSpawn(Location location)
     {
-        //This method will spawn monsters in a location.
+        //This method will spawn monsters in a location upon location's creation.
         return "";
+    }
+
+    public MonsterType getEnemyType()
+    {
+        return enemyType;
+    }
+
+    public void setEnemyType(MonsterType enemyType)
+    {
+        this.enemyType = enemyType;
     }
 }//end class Monster

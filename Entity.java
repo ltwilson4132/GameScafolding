@@ -7,7 +7,7 @@ public class Entity
     protected int defense;
     protected ArrayList<Item> inventory = new ArrayList<Item>();//Changed to an ArrayList of Item objects instead of just Objects.
 
-    public Entity(String entityType, int health, int defense, ArrayList<Item> inventory)
+    public Entity(int health, int defense, ArrayList<Item> inventory)
     {
         //this.entityType = entityType;
         this.health = health;
@@ -40,4 +40,24 @@ public class Entity
         inventory.remove(item);
     }
 
+    //Added getters and setters
+    public int getHealth()
+    {
+        return health;
+    }
+
+    public void setHealth(int health)
+    {
+        this.health = health;
+    }
+
+    public int getDefense()
+    {
+        return defense;
+    }
+
+    public void setDefense(int defense)
+    {
+        this.defense = defense;
+    }
 }
