@@ -33,19 +33,19 @@ public class Dice
     }
     */
 
-    public int rollDiceSix()
+    public static int rollDiceSix()
     {
         //Generates random number between 1 and 6.
         return 0;
     }
 
-    public int rollDiceTwenty()
+    public static int rollDiceTwenty()
     {
         //Generates random number between 1 and 20.
         return 0;
     }
     
-    public int generateRandomNum(int limit)
+    public static int generateRandomNum(int limit)
     {
         //This method will be used to generate a random number between 0 and the limit or 1 and the limit.
         return 0;
