@@ -8,9 +8,9 @@ public class Character extends Entity
     //private int movement;
     //ArrayList<Item> inventory = new ArrayList<Item>(); Commented out because not needed. Inherits inventory from Entity.
 
-    public Character(String name, CharacterType characterClass, int hp, int def, ArrayList<Item> inventory)
+    public Character(String name, CharacterType characterClass, int hp, int def)
     {
-        super(hp, def, inventory); //Removed name
+        super(hp, def); //Removed name
         this.type = characterClass;
         this.name = name;//Added to set name field.
     }
@@ -24,11 +24,6 @@ public class Character extends Entity
     }
     */
 
-    public String useItem(Item item)
-    {
-        //This method will use an item
-        return "";
-    }
 
     public String Inventory(ArrayList<Item> inventory)//Changed because inventory is an ArrayList of Item objects.
     {
@@ -63,4 +58,5 @@ public class Character extends Entity
     {
         this.name = name;
     }
+
 }

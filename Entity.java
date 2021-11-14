@@ -1,18 +1,19 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
-public class Entity
+public class Entity implements Damage
 {
     //protected String entityType;
     protected int health;
     protected int defense;
-    protected ArrayList<Item> inventory = new ArrayList<Item>();//Changed to an ArrayList of Item objects instead of just Objects.
+    protected HashMap<String, Item> cInventory;//Changed to an ArrayList of Item objects instead of just Objects.
 
-    public Entity(int health, int defense, ArrayList<Item> inventory)
+    public Entity(int health, int defense)
     {
         //this.entityType = entityType;
         this.health = health;
         this.defense = defense;
-        this.inventory = inventory;
+        cInventory = new HashMap<String, Item>();
     }
 
     /*
@@ -28,18 +29,26 @@ public class Entity
     }
     */
 
-    public void addToInventory(Item item)
+    public void addToInventory(String name, Item item)
     {
         //adds an item to entities inventory
-        inventory.add(item);
+        cInventory.put(name, item);
     }
 
-    public void dropFromInventory(Item item)
+    public void dropFromInventory(String name)
     {
         //drops an item from entities inventory
-        inventory.remove(item);
+        cInventory.remove(name);
     }
 
+    public void UseItem(Character player, Item item)
+    {
+        if(item.getItemName() == "Healing")
+        {
+            player.setHealth(health += 5);
+        }
+        //Need to wait for more itemes
+    }
     //Added getters and setters
     public int getHealth()
     {
@@ -59,5 +68,10 @@ public class Entity
     public void setDefense(int defense)
     {
         this.defense = defense;
+    }
+
+    public void doDamage(int damage, Entity target)
+    {
+        target.setHealth(health -= damage);
     }
 }

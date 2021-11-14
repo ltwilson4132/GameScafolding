@@ -26,9 +26,9 @@ public class Monster extends Entity
 {
     private MonsterType enemyType;
 
-    public Monster(MonsterType enemyType, int hp, int def, ArrayList<Item> inventory)
+    public Monster(MonsterType enemyType, int hp, int def)
     {
-        super(hp, def, inventory);
+        super(hp, def);
         this.enemyType = enemyType;
     }
 
