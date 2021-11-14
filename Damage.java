@@ -1,4 +1,4 @@
 public interface Damage
 {
-    public int doDamage();
+    public int Attack();
 }
