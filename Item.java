@@ -1,9 +1,5 @@
 public class Item
 {
-    //Need to add attributes. Changed name to just Item. Makes more sense and fixed issues elsewhere.
-    //private Item item;
-
-    //Added Attributes, Constructor, getters, and setters
     private String itemName;
     private ItemType itemType;
 
@@ -33,21 +29,10 @@ public class Item
         this.itemType = itemType;
     }
 
-    /*
-    public void addToInventory(Item item)
+    @Override
+    public String toString()
     {
-
+        //String describing Item.
+        return "";
     }
-
-
-    public void removeUponUse(Item item)
-    {
-
-    }
-
-    public void cancel()
-    {
-
-    }
-    */
 }
