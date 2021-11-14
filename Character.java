@@ -1,10 +1,13 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 //Add Enum for Character type and monster type.
 public class Character extends Entity
 {
     private CharacterType type;
     private String  name;
+    private Location currentLocation;
+    Scanner kb = new Scanner(System.in);
     //private int movement;
     //ArrayList<Item> inventory = new ArrayList<Item>(); Commented out because not needed. Inherits inventory from Entity.
 
@@ -15,27 +18,43 @@ public class Character extends Entity
         this.name = name;//Added to set name field.
     }
 
-    /*
-    public String Move(Location location)
-    {
-        //Not sure what this method would do as we discussed not having movement
-        this.movement = movement;
-        return "";
-    }
-    */
-
-
-    public String Inventory(ArrayList<Item> inventory)//Changed because inventory is an ArrayList of Item objects.
+    public String Inventory()//Changed because inventory is an ArrayList of Item objects.
     {
         //This method will show the user what items they currently have
-        return "";//Changed to return statement. For one method needs to return a String and two should not print from methods.
+        String temp;
+        for (Item item:this.inventory)
+        {
+            System.out.println(inventory.get(i));
+        }
+        return inventory;//Changed to return statement. For one method needs to return a String and two should not print from methods.
     }
 
-    public String Respawn(Entity entity)
+    public String Respawn(Character player)
     {
         //Player should get an option to respawn or quit.
         //Respawn will set players health back to full and move them to the previous location
+        System.out.println("Would you like to continue?" + "\n" + "Yes or No");
+        if (kb.nextLine().contains("yes"))
+        {
+            player.health = 100;
+            Game.spawnMonster;
+        } else
+        {
+            System.out.println("Thank you for playing!");
+            System.exit(0);
+        }
         return "";
+    }
+
+    public int Attack()
+    {
+        if (CharacterType.equals("ARCHER"))
+        {
+            return Dice.rollDiceTwenty() + 2;
+        } else
+        {
+            return Dice.rollDiceTwenty();
+        }
     }
 
     //Added getters and setters
