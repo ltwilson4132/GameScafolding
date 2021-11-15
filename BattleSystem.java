@@ -23,6 +23,7 @@ public class BattleSystem //extends Dice Should not extend Dice. BattleSystem us
         return winnerText;
     }
 
+
     public void testDeath(Character player, Monster enemy)
     {
         if(player.health == 0)
@@ -55,9 +56,10 @@ public class BattleSystem //extends Dice Should not extend Dice. BattleSystem us
         } else if(testVar == 2)
         {
             System.out.println("Please select an item:");
-            for (String name:player.cInventory.keySet()) {
+            /*for (String name:player.cInventory.keySet()) {
                 System.out.println(name);
-            }
+            }*/
+            player.Inventory();
             String userInput = kb.nextLine().toLowerCase();
             if (player.cInventory.get(userInput) != null) { // checks against null, if not null, will work
                 player.UseItem(player, player.cInventory.get(userInput));
@@ -70,32 +72,32 @@ public class BattleSystem //extends Dice Should not extend Dice. BattleSystem us
         //Roll twenty dice to decide attack power, take attack power minus defenders defense and take that amount of health from the defender.
         Dice d20 = new Dice();
 
-        int testDice = d20.rollDiceTwenty();
+        int testDice = attacker.Attack();
         if(testDice < defender.defense)//miss
         {
             System.out.println("Miss...");
-            attacker.doDamage(0, defender);
+            attacker.Attack();
         } else if(testDice >= defender.defense)
         {
             Dice d6 = new Dice();
             int dmgRoll;
-            if (testDice == 20) // crit
+            if (testDice >= 20) // crit
             {
                 System.out.println("Critcal!");
                 dmgRoll = d6.rollDiceSix();
-                attacker.doDamage(dmgRoll, defender);
+                defender.setHealth(defender.health -= dmgRoll);
                 System.out.println("Hit for " + dmgRoll);
                 dmgRoll = d6.rollDiceSix();
-                attacker.doDamage(dmgRoll, defender);
+                defender.setHealth(defender.health -= dmgRoll);
                 System.out.println("Hit for " + dmgRoll);
             } else
                 {
                     System.out.println("Landed.");
                     dmgRoll = d6.rollDiceSix();
-                    attacker.doDamage(dmgRoll, defender);
+                    defender.setHealth(defender.health -= dmgRoll);
                     System.out.println("Hit for " + dmgRoll);
                 }
-        }
+            }
         }
 
     /*

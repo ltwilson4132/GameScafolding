@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 //Add Enum for Character type and monster type.
-public class Character extends Entity
+public class Character extends Entity implements Damage
 {
     private CharacterType type;
     private String  name;
@@ -47,7 +47,7 @@ public class Character extends Entity
 
     public int Attack()
     {
-        if (CharacterType.equals("ARCHER"))
+        if (type.equals("ARCHER"))
         {
             return Dice.rollDiceTwenty() + 2;
         } else

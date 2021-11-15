@@ -11,7 +11,7 @@
  */
 import java.util.ArrayList;
 
-public class Boss extends Monster implements Attack
+public class Boss extends Monster implements Damage
 {
     public Boss(MonsterType enemyType, int health, int defense, ArrayList<Item> inventory)
     {
@@ -37,4 +37,5 @@ public class Boss extends Monster implements Attack
         }
 
     }
+
 }

@@ -22,7 +22,7 @@
 
 import java.util.ArrayList;
 
-public class Monster extends Entity
+public class Monster extends Entity implements Damage
 {
     private MonsterType enemyType;
 
@@ -46,5 +46,10 @@ public class Monster extends Entity
     public void setEnemyType(MonsterType enemyType)
     {
         this.enemyType = enemyType;
+    }
+
+    public int Attack()
+    {
+        return Dice.rollDiceTwenty();
     }
 }//end class Monster

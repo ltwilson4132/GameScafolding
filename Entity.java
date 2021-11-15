@@ -70,8 +70,8 @@ public class Entity implements Damage
         this.defense = defense;
     }
 
-    public void doDamage(int damage, Entity target)
-    {
-        target.setHealth(health -= damage);
+    @Override
+    public int Attack() {
+        return 0;
     }
 }
