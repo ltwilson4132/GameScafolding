@@ -4,9 +4,9 @@
  * Project name: RNG Warriors Project
  * -------------------------------------------------------------------------------
  * Author's name and email: Steven Caleb Rains rainss@etsu.edu
- * Course-Section: CSCI-1250-900
+ * Course-Section: CSCI-1260-003
  * Creation Date: 11/11/21
- * Last modified: 11/13/21
+ * Last modified: 11/14/21
  * -------------------------------------------------------------------------------
  */
 import java.io.*;
@@ -24,27 +24,32 @@ import java.util.Scanner;
  */
 public class ReadFile
 {
-    public static void LoadGame() throws IOException {
-        Character savedPlayer = player;  // creating Character object to restore
-        HashMap<String, Location> savedMap = map; // creating HashMap to restore
+    public static void LoadGame(Character player, HashMap<String, Location> map)
+    {
+        Character savedPlayer = player;
+        HashMap<String, Location> savedMap = map;
        try
        {
-           FileInputStream saveFile = new FileInputStream("saveFile.txt"); //opens file to read from
-           ObjectInputStream saveData = new ObjectInputStream(saveFile); // creates an ObjectInputStream to get objects from the save file
+           File savedFile = new File("saveFile.txt"); //opens the file to be read from
+           Scanner saveReader = new Scanner(savedFile); // creates a Scanner to read from the file
 
-           savedPlayer = (Character) saveData.readObject(); //restoring Character object
-           savedMap = (HashMap<String, Location>) saveData.readObject(); //restoring the map
+           while (saveReader.hasNextLine()) //while there is another line, the reader will read the data and then print it
+           {
+               String saveData = saveReader.nextLine();
+               System.out.println(saveData);
+           }
 
-           saveFile.close(); // close the save file
+           saveReader.close(); // close the save file
+           System.out.println("Save loaded!");
        }
-       catch (FileNotFoundException | ClassNotFoundException notFound)
+       catch (IOException notFound) // handles exception when save file is not found
        {
            System.out.println("Save data not found!");
        }
        //Print loaded data
-       System.out.println("Save data loaded: \n");
-       System.out.println("Player: " + savedPlayer + "\n");
-       System.out.println("Location: " + savedMap);
+       //System.out.println("Save data loaded: \n");
+       //System.out.println("Player: " + savedPlayer + "\n");
+       //System.out.println("Location: " + savedMap);
     }
 }
 
