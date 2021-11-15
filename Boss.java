@@ -24,8 +24,6 @@ public class Boss extends Monster implements Damage
     {
         int damage;
         Character player = null;
-        //int additionalBossDamage;
-        //int bossDamage;
 
         //Boss has stronger attacks, so DiceTwenty and DiceSix are rolled and added together
         // before subtracting player defense to return damage dealt
