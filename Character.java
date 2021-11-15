@@ -21,12 +21,11 @@ public class Character extends Entity
     public String Inventory()//Changed because inventory is an ArrayList of Item objects.
     {
         //This method will show the user what items they currently have
-        String temp;
-        for (Item item:this.inventory)
-        {
-            System.out.println(inventory.get(i));
+        Entity player = null;
+        for (String name:player.cInventory.keySet()) {
+            System.out.println(name);
         }
-        return inventory;//Changed to return statement. For one method needs to return a String and two should not print from methods.
+        return name;
     }
 
     public String Respawn(Character player)
