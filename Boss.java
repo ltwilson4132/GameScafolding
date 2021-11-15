@@ -16,7 +16,7 @@ public class Boss extends Monster implements Damage
     public Boss(MonsterType enemyType, int hp, int def, ArrayList<Item> inventory)
     {
         super(enemyType, hp, def, inventory);
-        String bossName = "The Boss";
+        //String bossName = "The Boss";
     }
 
     @Override
