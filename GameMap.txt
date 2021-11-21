@@ -1,0 +1,5 @@
+Forrest,A dark and damp forest filled with monsters. You feel unnerved by what maybe lurking in the shadows.,5
+Desert,You find yourself in a large and hot desert. It goes on as far as the eye can see. In the distance you see a mountain.,10
+Cave,You come to a whole in the base of the mountain. The mouth to a cave opens up in front of you. You can hear the echoes of something deep in the dark abyss at your feet.,20
+Castle,After battling through the cave you are surprised to find an elegant wooden door. When you open it you find yourself in an immense and luxurious castle. There are plenty of halls and stairs to get around. You sense something at the highest point.,25
+Cheese Moon,At the highest point of the castle you find a rocket. Although it seems to be held together by duct tape and staples you get on it. As soon as you strap in you feels the immense pressure of the G-Force as you launch off the ground. You shortly land on the moon only something isn't right. Is that cheese beneath your feet?,40
