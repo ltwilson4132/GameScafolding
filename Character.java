@@ -22,9 +22,16 @@ public class Character extends Entity implements Damage
     {
         //This method will show the user what items they currently have
         Entity player = null;
-        for (String name:player.cInventory.keySet()) {
-            System.out.println(name);
-        }
+        if (!cInventory.isEmpty())
+        {
+            for (String name : player.cInventory.keySet())
+            {
+                System.out.println("You have a " + name);
+            }
+        } else
+            {
+            System.out.println("Your inventory is empty");
+            }
         return name;
     }
 
@@ -36,7 +43,7 @@ public class Character extends Entity implements Damage
         if (kb.nextLine().contains("yes"))
         {
             player.health = 100;
-            Game.spawnMonster;
+            Game.SpawnMonsters();
         } else
         {
             System.out.println("Thank you for playing!");
