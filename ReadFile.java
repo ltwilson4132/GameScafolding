@@ -12,6 +12,7 @@
 import java.io.*;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 /*
  * Class Name: ReadFile<br>
@@ -62,6 +63,57 @@ public class ReadFile
        //System.out.println("Save data loaded: \n");
        //System.out.println("Player: " + savedPlayer + "\n");
        //System.out.println("Location: " + savedMap);
+    }
+
+    /**
+     * Method Name: readLocations <br>
+     * Method Purpose: reads file from given path and puts sets the location name and location description
+     * into array list and closes when finished<br>
+     *
+     * <hr>
+     * Date created: 11/22/21 <br>
+     * Date last modified: 11/22/21 <br>
+     * <hr>
+     *
+     * @param path
+     * @throws FileNotFoundException
+     */
+    public ArrayList<Location> readLocations(String path) throws FileNotFoundException
+    {
+        ArrayList<Location> locations = new ArrayList<>();
+
+        try {
+            BufferedReader myLocationReader = new BufferedReader(new FileReader(path));
+
+            try {
+                String locationEntry = myLocationReader.readLine();
+
+                while(locationEntry != null){
+                    String[] locationInfo = locationEntry.split(",");
+
+                    Location location = new Location();
+
+                    location.setLocationName(locationInfo[0]);
+                    location.setLocationDescription(locationInfo[1]);
+
+                    locations.add(location);
+
+                    locationEntry = myLocationReader.readLine();
+                }
+            }
+            catch(IOException exc)
+            {
+                System.out.println(exc);
+            }
+
+            myLocationReader.close();
+        }
+        catch(IOException exc)
+        {
+            System.out.println("File not found!");
+        }
+
+        return locations;
     }
 }
 
