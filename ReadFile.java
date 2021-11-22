@@ -91,10 +91,14 @@ public class ReadFile
                 while(locationEntry != null){
                     String[] locationInfo = locationEntry.split(",");
 
-                    Location location = new Location();
+                    String locationName = null;
+                    String locationDescription = null;
+                    int size = 0;
+                    Location location = new Location(locationName, locationDescription, size);
 
                     location.setLocationName(locationInfo[0]);
                     location.setLocationDescription(locationInfo[1]);
+                    location.getSize(locationInfo[2]);
 
                     locations.add(location);
 
