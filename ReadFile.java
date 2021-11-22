@@ -78,40 +78,22 @@ public class ReadFile
      * @param path
      * @throws FileNotFoundException
      */
-    public ArrayList<Location> readLocations(String path) throws FileNotFoundException
+    public static ArrayList<Location> readLocations(String path) throws FileNotFoundException
     {
         ArrayList<Location> locations = new ArrayList<>();
+        String locationEntry;
 
-        try {
-            BufferedReader myLocationReader = new BufferedReader(new FileReader(path));
-
-            try {
-                String locationEntry = myLocationReader.readLine();
-
-                while(locationEntry != null){
+        try(BufferedReader myLocationReader = new BufferedReader(new FileReader(path)))
+        {
+                while((locationEntry = myLocationReader.readLine()) != null)
+                {
                     String[] locationInfo = locationEntry.split(",");
 
-                    String locationName = null;
-                    String locationDescription = null;
-                    int size = 0;
-                    Location location = new Location(locationName, locationDescription, size);
-
-                    location.setLocationName(locationInfo[0]);
-                    location.setLocationDescription(locationInfo[1]);
-                    location.getSize(locationInfo[2]);
+                    Location location = new Location(locationInfo[0], locationInfo[1], Integer.parseInt(locationInfo[3]));
 
                     locations.add(location);
-
-                    locationEntry = myLocationReader.readLine();
-                }
-            }
-            catch(IOException exc)
-            {
-                System.out.println(exc);
-            }
-
-            myLocationReader.close();
-        }
+                }//end while
+        }//end try
         catch(IOException exc)
         {
             System.out.println("File not found!");
