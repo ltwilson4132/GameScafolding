@@ -6,7 +6,7 @@
  * Author's name and email: Steven Caleb Rains rainss@etsu.edu
  * Course-Section: CSCI-1260-003
  * Creation Date: 11/11/21
- * Last modified: 11/14/21
+ * Last modified: 11/13/21
  * -------------------------------------------------------------------------------
  */
 import java.io.*;
@@ -19,11 +19,23 @@ import java.util.Scanner;
  *
  * <hr>
  * Date created: 11/11/21<br>
- * Last modified: 11/13/21
+ * Last modified: 11/14/21
  * @author Steven Caleb Rains
  */
 public class ReadFile
 {
+    /**
+     * Method Name: LoadGame <br>
+     * Method Purpose: read a file containing save information and load that information (load save) <br>
+     *
+     * <hr>
+     * Date created: 11/11/2021 <br>
+     * Date last modified: 11/14/2021 <br>
+     * <hr>
+     *
+     * @param player
+     * @param map
+     */
     public static void LoadGame(Character player, HashMap<String, Location> map)
     {
         Character savedPlayer = player;
