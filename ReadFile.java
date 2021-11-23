@@ -89,7 +89,7 @@ public class ReadFile
                 {
                     String[] locationInfo = locationEntry.split(",");
 
-                    Location location = new Location(locationInfo[0], locationInfo[1], Integer.parseInt(locationInfo[3]));
+                    Location location = new Location(locationInfo[0], locationInfo[1], Integer.parseInt(locationInfo[2]));
 
                     locations.add(location);
                 }//end while
