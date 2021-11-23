@@ -4,16 +4,26 @@ import java.util.Scanner;
 public class BattleSystem //extends Dice Should not extend Dice. BattleSystem uses Dice.
 {
     //private String battleType;
-    Scanner kb = new Scanner(System.in);
-    String winnerText = "";
-    public String startBattle(Character player, Monster enemy)
+    static Scanner kb = new Scanner(System.in);
+    static String winnerText = "";
+    public static String startBattle(Character player, Monster enemy)
     {
         //Method that starts a battle between 2 entities
-        while(player.health > 0 || enemy.health > 0)
+        while(player.health >= 0 && enemy.health >= 0)
         {
-            testDeath(player, enemy);
+            if (testDeath(player, enemy) == true)
+            {
+                break;
+            }
+            System.out.println(player.getName() + " turn.");
             Turn(player, enemy);
             testDeath(player, enemy);
+            if (testDeath(player, enemy) == true)
+            {
+                break;
+            }
+            System.out.println(enemy.getEnemyType() + " turn.");
+            kb.nextLine();
             Attack(enemy, player);
         }
         //Check to see if either entity is dead.
@@ -24,50 +34,58 @@ public class BattleSystem //extends Dice Should not extend Dice. BattleSystem us
     }
 
 
-    public void testDeath(Character player, Monster enemy)
+    public static boolean testDeath(Character player, Monster enemy)
     {
-        if(player.health == 0)
+        if(player.health <= 0)
         {
             player.Respawn(player);
-            winnerText = "The winner is: " + enemy;
+            winnerText = "The winner is: " + enemy.getEnemyType();
+            return true;
         }
-        else if(enemy.health == 0)
+        else if(enemy.health <= 0)
         {
             /* player. location.size - 1?*/;
-            winnerText = "The winner is: " + player;
+            winnerText = "The winner is: " + player.getName();
+            return true;
         }
+        return false;
     }
 
-    public void Turn(Character player, Monster enemy)
+    public static void Turn(Character player, Monster enemy)
     {
-        int testVar = 0;
+        String testVar = "";
         System.out.println("What would you like to do?");
-        System.out.printf("1. Attack");
-        System.out.println("2. Inventory");
-        testVar = kb.nextInt();
-        while(testVar != 1 || testVar != 2)
+        System.out.println("1. Attack");
+        System.out.println(" 2. Inventory");;
+        while(!testVar.equals("attack") && !testVar.equals("inventory"))
         {
             System.out.println("Please enter a valid choice");
-            testVar = kb.nextInt();
+            testVar = kb.nextLine().toLowerCase();
         }
-        if (testVar == 1)
+        if (testVar.equals("attack"))
         {
             Attack(player, enemy);
-        } else if(testVar == 2)
+        } else if(testVar.equals("inventory"))
         {
             System.out.println("Please select an item:");
             /*for (String name:player.cInventory.keySet()) {
                 System.out.println(name);
             }*/
-            player.Inventory();
-            String userInput = kb.nextLine().toLowerCase();
-            if (player.cInventory.get(userInput) != null) { // checks against null, if not null, will work
+            player.Inventory(player);
+            String userInput = kb.nextLine();
+            if (player.cInventory.get(userInput) == null)
+            {
+                System.out.println("Selection Invalid");
+                System.out.println("\n");
+                Turn(player, enemy);
+            } else if (player.cInventory.get(userInput.toUpperCase()) != null)
+            { // checks against null, if not null, will work
                 player.UseItem(player, player.cInventory.get(userInput));
             }
         }
     }
 
-    public void Attack(Entity attacker, Entity defender)
+    public static void Attack(Entity attacker, Entity defender)
     {
         //Roll twenty dice to decide attack power, take attack power minus defenders defense and take that amount of health from the defender.
         Dice d20 = new Dice();
@@ -75,8 +93,10 @@ public class BattleSystem //extends Dice Should not extend Dice. BattleSystem us
         int testDice = attacker.Attack();
         if(testDice < defender.defense)//miss
         {
+            kb.nextLine();
             System.out.println("Miss...");
             attacker.Attack();
+            System.out.println("\n");
         } else if(testDice >= defender.defense)
         {
             Dice d6 = new Dice();
@@ -84,18 +104,35 @@ public class BattleSystem //extends Dice Should not extend Dice. BattleSystem us
             if (testDice >= 20) // crit
             {
                 System.out.println("Critcal!");
+                kb.nextLine();
+                System.out.println("\n");
+
                 dmgRoll = d6.rollDiceSix();
                 defender.setHealth(defender.health -= dmgRoll);
                 System.out.println("Hit for " + dmgRoll);
+                System.out.println("defender's health " + defender.getHealth());
+                kb.nextLine();
+                System.out.println("\n");
+
                 dmgRoll = d6.rollDiceSix();
                 defender.setHealth(defender.health -= dmgRoll);
                 System.out.println("Hit for " + dmgRoll);
+                System.out.println("defender's health " + defender.getHealth());
+                kb.nextLine();
+                System.out.println("\n");
+
             } else
                 {
                     System.out.println("Landed.");
+                    kb.nextLine();
+                    System.out.println("\n");
+
                     dmgRoll = d6.rollDiceSix();
                     defender.setHealth(defender.health -= dmgRoll);
                     System.out.println("Hit for " + dmgRoll);
+                    System.out.println("Defender's health " + defender.getHealth());
+                    kb.nextLine();
+                    System.out.println("\n");
                 }
             }
         }

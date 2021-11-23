@@ -18,10 +18,10 @@ public class Character extends Entity implements Damage
         this.name = name;//Added to set name field.
     }
 
-    public String Inventory()//Changed because inventory is an ArrayList of Item objects.
+    public void Inventory(Character player)//Changed because inventory is an ArrayList of Item objects.
     {
         //This method will show the user what items they currently have
-        Entity player = null;
+
         if (!cInventory.isEmpty())
         {
             for (String name : player.cInventory.keySet())
@@ -32,7 +32,6 @@ public class Character extends Entity implements Damage
             {
             System.out.println("Your inventory is empty");
             }
-        return name;
     }
 
     public String Respawn(Character player)
@@ -42,7 +41,7 @@ public class Character extends Entity implements Damage
         System.out.println("Would you like to continue?" + "\n" + "Yes or No");
         if (kb.nextLine().contains("yes"))
         {
-            player.health = 100;
+            player.health = 20;
             Game.SpawnMonsters();
         } else
         {

@@ -1,19 +1,19 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Entity implements Damage
+public abstract class Entity implements Damage
 {
     //protected String entityType;
     protected int health;
     protected int defense;
-    protected HashMap<String, Item> cInventory;//Changed to an ArrayList of Item objects instead of just Objects.
+    protected HashMap<String, ItemType> cInventory;//Changed to an ArrayList of Item objects instead of just Objects.
 
     public Entity(int health, int defense)
     {
         //this.entityType = entityType;
         this.health = health;
         this.defense = defense;
-        cInventory = new HashMap<String, Item>();
+        cInventory = new HashMap<String, ItemType>();
     }
 
     /*
@@ -29,7 +29,7 @@ public class Entity implements Damage
     }
     */
 
-    public void addToInventory(String name, Item item)
+    public void addToInventory(String name, ItemType item)
     {
         //adds an item to entities inventory
         cInventory.put(name, item);
@@ -41,11 +41,16 @@ public class Entity implements Damage
         cInventory.remove(name);
     }
 
-    public void UseItem(Character player, Item item)
+    public void UseItem(Character player, ItemType item)
     {
-        if(item.getItemName() == "Healing")
+        if(item == ItemType.HEALING)
         {
-            player.setHealth(health += 5);
+            System.out.println(player.getHealth());
+            System.out.println(player.getName() + " used " + item + " item.");
+            player.setHealth(health += Dice.rollDiceSix());
+            System.out.println(player.getHealth());
+            System.out.println("\n");
+            dropFromInventory(item.name());
         }
         //Need to wait for more itemes
     }
