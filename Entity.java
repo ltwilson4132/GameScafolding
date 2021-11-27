@@ -29,19 +29,12 @@ public abstract class Entity implements Damage
     }
     */
 
-    public void addToInventory(String name, ItemType item)
-    {
-        //adds an item to entities inventory
-        cInventory.put(name, item);
-    }
+    public abstract void addToInventory(String name, ItemType item);
 
-    public void dropFromInventory(String name)
-    {
-        //drops an item from entities inventory
-        cInventory.remove(name);
-    }
+    public abstract void dropFromInventory(String name);
 
-    public void UseItem(Character player, ItemType item)
+    public abstract void UseItem(Character player, ItemType item);
+    /*
     {
         if(item == ItemType.HEALING)
         {
@@ -54,6 +47,7 @@ public abstract class Entity implements Damage
         }
         //Need to wait for more itemes
     }
+    */
     //Added getters and setters
     public int getHealth()
     {
