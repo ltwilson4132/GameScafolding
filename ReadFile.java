@@ -59,10 +59,6 @@ public class ReadFile
        {
            System.out.println("Save data not found!");
        }
-       //Print loaded data
-       //System.out.println("Save data loaded: \n");
-       //System.out.println("Player: " + savedPlayer + "\n");
-       //System.out.println("Location: " + savedMap);
     }
 
     /**
@@ -76,23 +72,24 @@ public class ReadFile
      * <hr>
      *
      * @param path
-     * @throws FileNotFoundException
+     *
      */
-    public static void readLocations(String path, ArrayList<Location> locations) throws FileNotFoundException
+    public static ArrayList<Location> readLocations(String path)
     {
+        ArrayList<Location> locations = new ArrayList<>();
         String locationEntry;
 
         try(BufferedReader myLocationReader = new BufferedReader(new FileReader(path)))
         {
-                while((locationEntry = myLocationReader.readLine()) != null)
-                {
-                    String[] locationInfo = locationEntry.split(",");
+            while((locationEntry = myLocationReader.readLine()) != null)
+            {
+                String[] locationInfo = locationEntry.split(",");
 
-                    Location location = new Location(locationInfo[0], locationInfo[1], Integer.parseInt(locationInfo[2]));
+                Location location = new Location(locationInfo[0], locationInfo[1], Integer.parseInt(locationInfo[2]));
 
-                    locations.add(location);
-                }//end while
-        }//end try
+                locations.add(location);
+            }
+        }
         catch(IOException exc)
         {
             System.out.println("File not found!");
