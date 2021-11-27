@@ -78,9 +78,8 @@ public class ReadFile
      * @param path
      * @throws FileNotFoundException
      */
-    public static ArrayList<Location> readLocations(String path) throws FileNotFoundException
+    public static void readLocations(String path, ArrayList<Location> locations) throws FileNotFoundException
     {
-        ArrayList<Location> locations = new ArrayList<>();
         String locationEntry;
 
         try(BufferedReader myLocationReader = new BufferedReader(new FileReader(path)))
