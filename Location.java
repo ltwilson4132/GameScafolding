@@ -54,4 +54,9 @@ public class Location
     {
         //Removes a monster from the ArrayList when one is killed
     }
+    
+    public void ClearMonsters()
+    {
+        monsters.clear();
+    }
 }
