@@ -20,6 +20,7 @@
  * @author Logan Wilson
  */
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -40,8 +41,8 @@ public class Game
      * @param args array of Strings (not used in this program)
      * @returns void
      */
-    private ArrayList<Location> gameMap;
-    private ArrayList<String> forrestMonsters = new ArrayList<>();
+    private ArrayList<Location> gameMap = new ArrayList<>();
+    private ArrayList<String> forestMonsters = new ArrayList<>();
     private ArrayList<String> desertMonsters = new ArrayList<>();
     private ArrayList<String> caveMonsters = new ArrayList<>();
     private ArrayList<String> castleMonsters = new ArrayList<>();
@@ -52,9 +53,9 @@ public class Game
 
     public Game()
     {
-        forrestMonsters.add("Gremlin");
-        forrestMonsters.add("Zombie");
-        forrestMonsters.add("Spider");
+        forestMonsters.add("Gremlin");
+        forestMonsters.add("Zombie");
+        forestMonsters.add("Spider");
 
         desertMonsters.add("Mummy");
         desertMonsters.add("Sand Worm");
@@ -79,7 +80,7 @@ public class Game
 
     public void StartGame()
     {
-        gameMap = ReadFile.LoadMap("GameMap.txt");
+        ReadFile.readLocations("GameMap.txt", gameMap);
         SpawnMonsters();
         SpawnBosses();
         System.out.println("Welcome to the game. You will have to fight your way through 5 locations with a boss at the end of each location." + "\n" +
@@ -114,40 +115,54 @@ public class Game
         for (Location location : gameMap)
         {
             int numMonsters = (Dice.generateRandomNum(location.getSize()) + 1);
+
             for (int i = 0; i < numMonsters; i++)
             {
                 int monsterSelection = Dice.generateRandomNum(3);
 
 
-                if(location.getLocationName().equals("Forrest"))
+                if(location.getLocationName().equals("Forest"))
                 {
-                    Monster monster = new Monster(forrestMonsters.get(monsterSelection), Dice.RandomRange(5, 10), 2);
+                    //System.out.println("Forrest");
+                    Monster monster = new Monster(forestMonsters.get(monsterSelection), Dice.RandomRange(5, 10), 2);
                     GenerateItem(monster);
                     location.AddMonster(monster);
                 }
                 else if(location.getLocationName().equals("Desert"))
                 {
+                    //System.out.println("Desert");
                     Monster monster = new Monster(desertMonsters.get(monsterSelection), Dice.RandomRange(10, 15), 3);
                     GenerateItem(monster);
                     location.AddMonster(monster);
                 }
                 else if(location.getLocationName().equals("Cave"))
                 {
+                    //System.out.println("Cave");
                     Monster monster = new Monster(caveMonsters.get(monsterSelection), Dice.RandomRange(15, 20), 4);
                     GenerateItem(monster);
                     location.AddMonster(monster);
                 }
                 else if(location.getLocationName().equals("Castle"))
                 {
+                    //System.out.println("Castle");
                     Monster monster = new Monster(castleMonsters.get(monsterSelection), Dice.RandomRange(20, 25), 5);
+                    GenerateItem(monster);
+                    location.AddMonster(monster);
+                }
+                else if(location.getLocationName().equals("Cheese Moon"))
+                {
+                    //System.out.println("Cheese Moon");
+                    Monster monster = new Monster(moonMonsters.get(monsterSelection), Dice.RandomRange(25, 30), 10);
                     GenerateItem(monster);
                     location.AddMonster(monster);
                 }
                 else
                 {
-                    Monster monster = new Monster(moonMonsters.get(monsterSelection), Dice.RandomRange(25, 30), 10);
-                    GenerateItem(monster);
-                    location.AddMonster(monster);
+                    break;
+                    //System.out.println("Error");
+                    //Monster monster = new Monster(moonMonsters.get(monsterSelection), Dice.RandomRange(25, 30), 10);
+                    //GenerateItem(monster);
+                    //location.AddMonster(monster);
                 }
             }
         }
@@ -155,7 +170,8 @@ public class Game
 
     public Character CreateCharacter()
     {
-        String userInput = null;
+        String userInput = "";
+        Character character;
 
         System.out.println("What would you like the name of your character to be?");
         String playerName = input.nextLine();
@@ -164,30 +180,31 @@ public class Game
         {
 
             System.out.println("Please choose which character you would like to be:" + "\n" +
-                    CharacterType.ARCHER + "\n" +
-                    CharacterType.KNIGHT + "\n" +
-                    CharacterType.WIZARD);
-            userInput = input.nextLine();
+                    CharacterType.ARCHER.value + "\n" +
+                    CharacterType.KNIGHT.value + "\n" +
+                    CharacterType.WIZARD.value);
+            userInput = input.nextLine().toLowerCase();
 
-            if (userInput.equals("Archer"))
+            if (userInput.equals("archer"))
             {
-                return new Character(playerName, CharacterType.ARCHER, 100, Dice.rollDiceSix());
+                character = new Character(playerName, CharacterType.ARCHER, 100, Dice.rollDiceSix());
             }
-            else if(userInput.equals("Knight"))
+            else if(userInput.equals("knight"))
             {
-                return new Character(playerName, CharacterType.KNIGHT, 100, (Dice.rollDiceSix() + 2));
+                character = new Character(playerName, CharacterType.KNIGHT, 100, (Dice.rollDiceSix() + 2));
             }
-            else if(userInput.equals("Wizard"))
+            else if(userInput.equals("wizard"))
             {
-                return new Character(playerName, CharacterType.WIZARD, 120, Dice.rollDiceSix());
+                character = new Character(playerName, CharacterType.WIZARD, 120, Dice.rollDiceSix());
             }
             else
             {
                 System.out.println("Error you did not choose a valid option.\n");
-                userInput = null;
-                return new Character(null, null, 0, 0);
+                userInput = "";
+                character = new Character();
             }
-        }while(userInput.isEmpty());
+        }while(userInput.equals(""));
+        return character;
     }
 
     public void GenerateItem(Monster monster)
@@ -210,8 +227,8 @@ public class Game
 
     public void SpawnBosses()
     {
-        Boss forrestBoss = new Boss("Grizzly Bear", Dice.RandomRange(50, 75), 10);
-        gameMap.get(0).AddMonster(forrestBoss);
+        Boss forestBoss = new Boss("Grizzly Bear", Dice.RandomRange(50, 75), 10);
+        gameMap.get(0).AddMonster(forestBoss);
 
         Boss desertBoss = new Boss("Giant Skeleton", Dice.RandomRange(75, 100), 10);
         gameMap.get(1).AddMonster(desertBoss);
@@ -224,5 +241,40 @@ public class Game
 
         Boss moonBoss = new Boss("King Rat", Dice.RandomRange(175, 200), 10);
         gameMap.get(4).AddMonster(moonBoss);
+    }
+
+    public ArrayList<Location> getGameMap()
+    {
+        return gameMap;
+    }
+
+    public ArrayList<String> getForrestMonsters()
+    {
+        return forestMonsters;
+    }
+
+    public ArrayList<String> getDesertMonsters()
+    {
+        return desertMonsters;
+    }
+
+    public ArrayList<String> getCaveMonsters()
+    {
+        return caveMonsters;
+    }
+
+    public ArrayList<String> getCastleMonsters()
+    {
+        return castleMonsters;
+    }
+
+    public ArrayList<String> getMoonMonsters()
+    {
+        return moonMonsters;
+    }
+
+    public ArrayList<String> getItems()
+    {
+        return items;
     }
 }//end class Game

@@ -39,7 +39,7 @@ public class Dice
     
     public static int generateRandomNum(int limit)
     {
-        //This method will be used to generate a random number between 0 and the limit or 1 and the limit.
+        //This method will be used to generate a random number between 0 and the limit.
         return randNum.nextInt(limit);
     }
 
