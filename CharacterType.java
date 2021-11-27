@@ -4,10 +4,10 @@ public enum CharacterType
     WIZARD("Wizard"),
     ARCHER("Archer");
 
-    String type;
+    String value;
 
     CharacterType(String character)
     {
-        this.type = character;
+        this.value = character;
     }
 }
