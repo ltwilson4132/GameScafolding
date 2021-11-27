@@ -1,6 +1,13 @@
 public enum CharacterType
 {
-    KNIGHT,
-    WIZARD,
-    ARCHER;
+    KNIGHT("Knight"),
+    WIZARD("Wizard"),
+    ARCHER("Archer");
+
+    String type;
+
+    CharacterType(String character)
+    {
+        this.type = character;
+    }
 }
