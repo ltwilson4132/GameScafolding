@@ -92,5 +92,23 @@ public class Character extends Entity implements Damage
     {
         this.currentLocation = currentLocation;
     }
+    
+    @Override
+    public void addToInventory(String name, ItemType item)
+    {
+        
+    }
+
+    @Override
+    public void dropFromInventory(String name)
+    {
+
+    }
+
+    @Override
+    public void UseItem(Character player, ItemType item)
+    {
+
+    }
 
 }
