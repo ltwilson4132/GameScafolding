@@ -37,9 +37,9 @@ public class Boss extends Monster implements Damage
      * @param def
      * @param inventory
      */
-    public Boss(MonsterType enemyType, int hp, int def, ArrayList<Item> inventory)
+    public Boss(MonsterType enemyType, int hp, int def)
     {
-        super(enemyType, hp, def, inventory);
+        super(enemyType, hp, def);
 
     }
 
