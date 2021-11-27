@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 public class Monster extends Entity implements Damage
 {
-    private MonsterType enemyType;
+    protected MonsterType enemyType;
 
     public Monster(MonsterType enemyType, int hp, int def)
     {
