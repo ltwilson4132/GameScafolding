@@ -82,5 +82,15 @@ public class Character extends Entity implements Damage
     {
         this.name = name;
     }
+    
+    public Location getCurrentLocation()
+    {
+        return currentLocation;
+    }
+
+    public void setCurrentLocation(Location currentLocation)
+    {
+        this.currentLocation = currentLocation;
+    }
 
 }
