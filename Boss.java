@@ -91,10 +91,4 @@ public class Boss extends Monster implements Damage
      * <hr>
      *
      */
-    @Override
-    public MonsterType getEnemyType()
-    {
-        return super.getEnemyType();
-    }
-
 }
