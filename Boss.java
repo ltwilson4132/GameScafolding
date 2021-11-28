@@ -37,9 +37,9 @@ public class Boss extends Monster implements Damage
      * @param def
      * @param inventory
      */
-    public Boss(MonsterType enemyType, int hp, int def)
+    public Boss(MonsterType enemyType, int hp, int def, ArrayList<Item> inventory)
     {
-        super(enemyType, hp, def);
+        super(enemyType, hp, def, inventory);
 
     }
 
@@ -49,7 +49,7 @@ public class Boss extends Monster implements Damage
      *
      * <hr>
      * Date created: 11/11/2021 <br>
-     * Date last modified: 11/14/2021 <br>
+     * Date last modified: 11/28/2021 <br>
      * <hr>
      *
      */
@@ -61,7 +61,7 @@ public class Boss extends Monster implements Damage
 
         //Boss has stronger attacks, so DiceTwenty and DiceSix are each rolled and added together
         // before subtracting player defense to return damage dealt
-        damage = Dice.rollDiceTwenty() + Dice.rollDiceSix() - (player.defense);
+        damage = Dice.rollDiceTwenty() + Dice.rollDiceSix();
 
         return damage;
     }
