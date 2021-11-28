@@ -31,7 +31,7 @@ public abstract class Entity implements Damage
 
     public abstract void addToInventory(String name, ItemType item);
 
-    public abstract void dropFromInventory(String name);
+    public abstract ItemType dropFromInventory(String name);
 
     public abstract void UseItem(Character player, ItemType item);
     /*
