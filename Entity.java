@@ -33,7 +33,7 @@ public abstract class Entity implements Damage
 
     public abstract ItemType dropFromInventory(String name);
 
-    public abstract void UseItem(Character player, ItemType item);
+    public abstract void UseItem(ItemType item);
     /*
     {
         if(item == ItemType.HEALING)
