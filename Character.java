@@ -34,7 +34,7 @@ public class Character extends Entity implements Damage
             }
     }
 
-    public String Respawn(Character player)
+    public void Respawn(Character player)
     {
         //Player should get an option to respawn or quit.
         //Respawn will set players health back to full and move them to the previous location
