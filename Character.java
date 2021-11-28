@@ -41,7 +41,8 @@ public class Character extends Entity implements Damage
         System.out.println("Would you like to continue?" + "\n" + "Yes or No");
         if (kb.nextLine().contains("yes"))
         {
-            player.health = 20;
+            if(this.type.value.equals("Wizard")) this.health = 120;
+            else this.health = 100;
             Game.SpawnMonsters();
         } else
         {
