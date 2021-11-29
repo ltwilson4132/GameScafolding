@@ -20,22 +20,6 @@ public abstract class Entity implements Damage
 
     public abstract ItemType dropFromInventory(String name);
 
-    public abstract void UseItem(ItemType item);
-    /*
-    {
-        if(item == ItemType.HEALING)
-        {
-            System.out.println(player.getHealth());
-            System.out.println(player.getName() + " used " + item + " item.");
-            player.setHealth(health += Dice.rollDiceSix());
-            System.out.println(player.getHealth());
-            System.out.println("\n");
-            dropFromInventory(item.name());
-        }
-        //Need to wait for more itemes
-    }
-    */
-    //Added getters and setters
     public int getHealth()
     {
         return health;
