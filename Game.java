@@ -137,6 +137,7 @@ public class Game
                             }
                         }
                     }
+                    player.getCurrentLocation().removeMonster(monster);
                 }
                 else
                 {
