@@ -38,7 +38,6 @@ public class BattleSystem //extends Dice Should not extend Dice. BattleSystem us
     {
         if(player.health <= 0)
         {
-            player.Respawn(player);
             winnerText = "The winner is: " + enemy.getEnemyType();
             return true;
         }
