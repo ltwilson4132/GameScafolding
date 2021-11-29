@@ -80,41 +80,147 @@ public class Game
 
     public void StartGame()
     {
-        ReadFile.readLocations("GameMap.txt", gameMap);
+        try
+        {
+            ReadFile.readLocations("GameMap.txt", gameMap);
+        }
+        catch (FileNotFoundException ex)
+        {
+            System.out.println(ex);
+        }
         SpawnMonsters();
-        SpawnBosses();
-        System.out.println("Welcome to the game. You will have to fight your way through 5 locations with a boss at the end of each location." + "\n" +
-                "To get started create your character");
+        System.out.println("Welcome to the game. You will have to fight your way through " + gameMap.size() + " locations with a boss at the end of each location." + "\n" +
+                "To get started create your character\n");
         player = CreateCharacter();
+        System.out.println("Character Name: " + player.getName() + "\n" +
+                "Character Class: " + player.getType().value + "\n" +
+                "Character Health: " + player.getHealth() + "\n" +
+                "Character Defense: " + player.getDefense());
         player.setCurrentLocation(gameMap.get(0));
-        System.out.println(player.getCurrentLocation().getLocationName());
-        System.out.println(player.getCurrentLocation().getLocationDescription());
     }
 
     public void PlayGame()
     {
+        boolean playTheGame = true;
+        String userInput = null;
         do{
-            int i = 0;
-            for (Location location:gameMap)
+            System.out.println("\n" + player.getCurrentLocation().getLocationName());
+            System.out.println("\n" + player.getCurrentLocation().getLocationDescription());
+            for (Monster monster:player.getCurrentLocation().getMonstersArray())
             {
-                Monster monster = location.GetMonster(i);
+                System.out.println("You see the following monsters before you \n" +
+                        player.getCurrentLocation().getMonsters());
                 System.out.println("You meet a " + monster.getEnemyType() + ". You engage in battle.");
                 String winner = BattleSystem.startBattle(player, monster);
                 if (winner.equals(player.getName()))
                 {
                     System.out.println("Congratulations! You defeated the " + monster.getEnemyType());
-                    monster.dropFromInventory("test");
+                    System.out.println("Here are your current stats.\n" +
+                            "Health: " + player.getHealth() + "\n" +
+                            "Total Defense: " + (player.getDefense() + player.getDefenseBoost()) + "\n" +
+                            "Attack Boost: +" + player.getAttackBoost() + " per roll");
+                    if (!monster.cInventory.isEmpty())
+                    {
+                        ItemType droppedItem = monster.dropFromInventory("test");
+                        System.out.println("The monster dropped a " + droppedItem.value + ".\n" +
+                                "Would you like to add this item to your inventory?");
+                        if (input.nextLine().toLowerCase().equals("yes")) player.addToInventory(droppedItem.value, droppedItem);
+                    }
+                }
+                else
+                {
+                    System.out.println("You were defeated by a " + monster.getEnemyType() + ".");
+                    Respawn();
                 }
             }
+            if(player.getCurrentLocation().getLocationName().equals("Forest"))
+            {
+                System.out.println("Congratulations! You have defeated all of the monster in the " + player.getCurrentLocation().getLocationName() + ". You will now move on to the next location.");
+                player.setCurrentLocation(gameMap.get(1));
 
-        }while(true);
+            }
+            else if(player.getCurrentLocation().getLocationName().equals("Desert"))
+            {
+                System.out.println("Congratulations! You have defeated all of the monster in the " + player.getCurrentLocation().getLocationName() + ". You will now move on to the next location.");
+                player.setCurrentLocation(gameMap.get(2));
+            }
+            else if(player.getCurrentLocation().getLocationName().equals("Cave"))
+            {
+                System.out.println("Congratulations! You have defeated all of the monster in the " + player.getCurrentLocation().getLocationName() + ". You will now move on to the next location.");
+                player.setCurrentLocation(gameMap.get(3));
+            }
+            else if(player.getCurrentLocation().getLocationName().equals("Castle"))
+            {
+                System.out.println("Congratulations! You have defeated all of the monster in the " + player.getCurrentLocation().getLocationName() + ". You will now move on to the next location.");
+                player.setCurrentLocation(gameMap.get(4));
+            }
+            else
+            {
+                while(!(userInput.equals("yes") && !(userInput.equals("no"))))
+                {
+                    System.out.println("Congratulations! You defeated the final boss.\nWould you like to play again yes or no?");
+                    userInput = input.nextLine().toLowerCase();
+                    if(userInput.equals("yes"))
+                    {
+                        StartGame();
+                    }
+                    else if(userInput.equals("no"))
+                    {
+                        System.out.println("Thank you for playing!");
+                        playTheGame = false;
+                    }
+                    else
+                    {
+                        System.out.println("Please choose a valid option.");
+                    }
+                }
+
+            }
+        }while(playTheGame);
+    }
+
+    public void Respawn()
+    {
+        String userInput = null;
+        while(!(userInput.equals("yes") && !(userInput.equals("no"))))
+        {
+            System.out.println("Would you like to continue?" + "\n" + "Yes or No");
+            userInput = input.nextLine().toLowerCase();
+            if (userInput.equals("yes"))
+            {
+                if (player.getType() == CharacterType.WIZARD) player.setHealth(120);
+                else player.setHealth(100);
+                SpawnMonsters();
+                System.out.println("New monsters will be respawned and you will have to go back to the previous location");
+                if(player.getCurrentLocation().getLocationName().equals("Desert")) player.setCurrentLocation(gameMap.get(0));
+                else if(player.getCurrentLocation().getLocationName().equals("Cave")) player.setCurrentLocation(gameMap.get(1));
+                else if(player.getCurrentLocation().getLocationName().equals("Castle")) player.setCurrentLocation(gameMap.get(2));
+                else if(player.getCurrentLocation().getLocationName().equals("Moon")) player.setCurrentLocation(gameMap.get(3));
+                System.out.println("You respawned back at the beginning of the" + player.getCurrentLocation().getLocationName() +
+                        "The battle continues");
+            }
+            else if (userInput.equals("no"))
+            {
+                System.out.println("Thank you for playing!");
+                System.exit(0);
+            }
+            else
+            {
+                System.out.println("Please choose a valid option.");
+            }
+        }
     }
 
     public void SpawnMonsters()
     {
+        for (Location location:gameMap)
+        {
+            location.ClearMonsters();
+        }
+
         for (Location location : gameMap)
         {
-            int numMonsters = (Dice.generateRandomNum(location.getSize()) + 1);
+            int numMonsters = (Dice.generateRandomNum(location.getSize()-1) + 1);
 
             for (int i = 0; i < numMonsters; i++)
             {
@@ -166,6 +272,7 @@ public class Game
                 }
             }
         }
+        SpawnBosses();
     }
 
     public Character CreateCharacter()
@@ -201,7 +308,7 @@ public class Game
             {
                 System.out.println("Error you did not choose a valid option.\n");
                 userInput = "";
-                character = new Character();
+                character = new Character(null, null, 0, 0);
             }
         }while(userInput.equals(""));
         return character;
@@ -209,37 +316,49 @@ public class Game
 
     public void GenerateItem(Monster monster)
     {
-        int itemSelection = Dice.generateRandomNum(3);
+        int itemSelection = Dice.generateRandomNum(4);
 
-        if(items.get(itemSelection).equals("Healing Potion"))
+        if (itemSelection == 3)
         {
-            monster.addToInventory(items.get(itemSelection), new Item(items.get(itemSelection), ItemType.HEALING));
+
+        }
+        else if(items.get(itemSelection).equals("Healing Potion"))
+        {
+            monster.addToInventory(items.get(itemSelection), ItemType.HEALING);
+            //monster.addToInventory(items.get(itemSelection), new Item(items.get(itemSelection), ItemType.HEALING));
         }
         else if(items.get(itemSelection).equals("Attack Boost"))
         {
-            monster.addToInventory(items.get(itemSelection), new Item(items.get(itemSelection), ItemType.ATTACK_BOOST));
+            monster.addToInventory(items.get(itemSelection), ItemType.ATTACK_BOOST);
+            //monster.addToInventory(items.get(itemSelection), new Item(items.get(itemSelection), ItemType.ATTACK_BOOST));
         }
-        else
+        else if(items.get(itemSelection).equals("Defense Boost"))
         {
-            monster.addToInventory(items.get(itemSelection), new Item(items.get(itemSelection), ItemType.DEFENSE_BOOST));
+            monster.addToInventory(items.get(itemSelection), ItemType.DEFENSE_BOOST);
+            //monster.addToInventory(items.get(itemSelection), new Item(items.get(itemSelection), ItemType.DEFENSE_BOOST));
         }
     }
 
     public void SpawnBosses()
     {
         Boss forestBoss = new Boss("Grizzly Bear", Dice.RandomRange(50, 75), 10);
+        GenerateItem(forestBoss);
         gameMap.get(0).AddMonster(forestBoss);
 
         Boss desertBoss = new Boss("Giant Skeleton", Dice.RandomRange(75, 100), 10);
+        GenerateItem(desertBoss);
         gameMap.get(1).AddMonster(desertBoss);
 
         Boss caveBoss = new Boss("The Mutant Batman: Half Bat, Half Man", Dice.RandomRange(100, 150), 10);
+        GenerateItem(caveBoss);
         gameMap.get(2).AddMonster(caveBoss);
 
         Boss castleBoss = new Boss("Dragon", Dice.RandomRange(150, 175), 10);
+        GenerateItem(castleBoss);
         gameMap.get(3).AddMonster(castleBoss);
 
         Boss moonBoss = new Boss("King Rat", Dice.RandomRange(175, 200), 10);
+        GenerateItem(moonBoss);
         gameMap.get(4).AddMonster(moonBoss);
     }
 
