@@ -23,11 +23,11 @@ import java.util.ArrayList;
 public class Monster extends Entity implements Damage
 {
     protected String enemyType;
-    protected int attackBoost;
-    protected int defenseBoost;
-    protected ItemType item;
+    private int attackBoost;
+    private int defenseBoost;
+    private ItemType item;
 
-    public Monster(String enemyType, int hp, int def)
+    public Monster(String enemyType, int hp, int def, ArrayList<Item> inventory)
     {
         super(hp, def);
         this.enemyType = enemyType;
@@ -48,25 +48,56 @@ public class Monster extends Entity implements Damage
         return Dice.rollDiceTwenty();
     }
 
-    @Override
     //take out where it's expecting a character called player in the use item
-    public void UseItem (ItemType item)
+    public void useItem (String name)
     {
-
+        if (item == ItemType.HEALING)
+        {
+            this.health = this.health + 20;
+        } else if (item == ItemType.ATTACK_BOOST)
+        {
+            this.attackBoost = this.attackBoost + 2;
+        } else
+        {
+            this.defenseBoost = this.defenseBoost +2;
+        }
+        cInventory.remove(item);
     }
 
-    @Override
-    public void addToInventory (String name, ItemType item)
+    /**
+     * Method Name: addToInventory<br>
+     * Method Purpose: adds item to inventory <br>
+     *
+     * <hr>
+     * Date created: 11/18/2021 <br>
+     * Date last modified: 11/28/2021 <br>
+     * <hr>
+     *
+     * @param name
+     * @param item
+     */
+    public void addToInventory (String name, Item item)
     {
         cInventory.put(name, item);
     }
 
-    @Override
-    public ItemType dropFromInventory(String name)
+    /**
+     * Method Name: dropFromInventory<br>
+     * Method Purpose: drops item from inventory <br>
+     *
+     * <hr>
+     * Date created: 11/18/2021 <br>
+     * Date last modified: 11/28/2021 <br>
+     * <hr>
+     *
+     * @param name
+     */
+    public Item dropFromInventory(String name)
     {
-        ItemType item;
+        Item item;
         item = cInventory.get(name);
         cInventory.remove(item);
         return item;
     }
+
 }//end class Monster
