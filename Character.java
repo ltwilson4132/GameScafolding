@@ -68,7 +68,6 @@ public class Character extends Entity implements Damage
     }
 
     //Uses an item and applies the effect to the player
-    @Override
     public void UseItem(ItemType item)
     {
         if (item == ItemType.HEALING)
