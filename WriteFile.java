@@ -47,7 +47,6 @@ public class WriteFile
             System.out.println("Game Saved");
         } catch (IOException e) {
             System.out.println("Could Not Save Game");
-            e.printStackTrace();
         }
     }
 
@@ -56,7 +55,7 @@ public class WriteFile
         {
             //Writes the info of the player's character and the map to a text file to save the game.
             try {
-                FileWriter savePlayer = new FileWriter("SavedMap.txt");
+                FileWriter savePlayer = new FileWriter("GameMap.txt");
                 savePlayer.write(String.valueOf(locations));
                 savePlayer.close();
                 System.out.println("Game Saved");

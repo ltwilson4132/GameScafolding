@@ -27,7 +27,7 @@ public class Character extends Entity implements Damage
     {
         if (!cInventory.isEmpty())
         {
-            for (String name : player.cInventory.keySet())
+            for (String name : cInventory.keySet())
             {
                 System.out.println("You have a " + name);
             }
@@ -70,21 +70,17 @@ public class Character extends Entity implements Damage
     //Uses an item and applies the effect to the player
     public void UseItem(ItemType item)
     {
-        String name = "";
         if (item == ItemType.HEALING)
         {
-            this.health += 20;
-            name = "Healing Potion";
+            this.health = this.health + 20;
         } else if (item == ItemType.ATTACK_BOOST)
         {
             this.attackBoost = this.attackBoost + 2;
-            name = "Attack Boost";
         } else
         {
             this.defenseBoost = this.defenseBoost + 2;
-            name = "Defense Boost";
         }
-        cInventory.remove(name);
+        cInventory.remove(item);
     }
 
     //Added getters and setters
