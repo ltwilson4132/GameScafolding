@@ -16,19 +16,6 @@ public abstract class Entity implements Damage
         cInventory = new HashMap<String, ItemType>();
     }
 
-    /*
-    public void doDamage(int intDamge)
-    {
-        //Does damage to the entity
-        health -= intDamge;
-    }
-
-    public void die()
-    {
-       //I think it's supposed to mean: when health is 0, die() and pop up some flavor text? Because there is die and then respawn so I can only assume respawn is the real restart function
-    }
-    */
-
     public abstract void addToInventory(String name, ItemType item);
 
     public abstract ItemType dropFromInventory(String name);
