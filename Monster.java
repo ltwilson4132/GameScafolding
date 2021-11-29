@@ -1,12 +1,13 @@
+import java.util.ArrayList;
 /*
  * -------------------------------------------------------------------------------
  * File name: Monster.java
  * Project name: Monster
  * -------------------------------------------------------------------------------
- * Author's name and email: Logan Wilson wilsonlt@etsu.edu
+ * Author's name and email: Steven Caleb Rains rainss@etsu.edu
  * Course-Section: CSCI-1250-900
- * Creation Date: Oct 27, 2021
- * Last modified: Logan Wilson wilsonlt@etsu.edu Oct 27, 2021
+ * Creation Date: 10/27/21
+ * Last modified: 11/28/21
  * -------------------------------------------------------------------------------
  */
 
@@ -15,35 +16,29 @@
  * Class Purpose:  <br>
  *
  * <hr>
- * Date created: Oct 27, 2021<br>
- * Last modified: Oct 27, 2021
- * @author Logan Wilson
+ * Date created: 11/27/21<br>
+ * Last modified: 11/27/21
+ * @author S Caleb Rains
  */
-
-import java.util.ArrayList;
-
 public class Monster extends Entity implements Damage
 {
-    private MonsterType enemyType;
+    protected String enemyType;
+    private int attackBoost;
+    private int defenseBoost;
+    private ItemType item;
 
-    public Monster(MonsterType enemyType, int hp, int def)
+    public Monster(String enemyType, int hp, int def, ArrayList<Item> inventory)
     {
         super(hp, def);
         this.enemyType = enemyType;
     }
 
-    public String MonsterSpawn(Location location)
-    {
-        //This method will spawn monsters in a location upon location's creation.
-        return "";
-    }
-
-    public MonsterType getEnemyType()
+    public String getEnemyType()
     {
         return enemyType;
     }
 
-    public void setEnemyType(MonsterType enemyType)
+    public void setEnemyType(String enemyType)
     {
         this.enemyType = enemyType;
     }
@@ -52,4 +47,34 @@ public class Monster extends Entity implements Damage
     {
         return Dice.rollDiceTwenty();
     }
+
+    //take out where it's expecting a character called player in the use item
+    public void useItem (String name)
+    {
+        if (item == ItemType.HEALING)
+        {
+            this.health = this.health + 20;
+        } else if (item == ItemType.ATTACK_BOOST)
+        {
+            this.attackBoost = this.attackBoost + 2;
+        } else
+        {
+            this.defenseBoost = this.defenseBoost +2;
+        }
+        cInventory.remove(item);
+    }
+
+    public void addToInventory (String name, ItemType item)
+    {
+        cInventory.put(name, item);
+    }
+
+    public Item dropFromInventory(String name)
+    {
+        Item item;
+        item = cInventory.get(name);
+        cInventory.remove(item);
+        return item;
+    }
+
 }//end class Monster
