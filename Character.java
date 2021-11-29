@@ -23,7 +23,7 @@ public class Character extends Entity implements Damage
     }
 
     //Shows the user what items they currently have
-    public void Inventory(Character player)
+    public void Inventory()
     {
         if (!cInventory.isEmpty())
         {
