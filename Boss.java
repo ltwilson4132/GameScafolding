@@ -35,11 +35,10 @@ public class Boss extends Monster implements Damage
      * @param enemyType
      * @param hp
      * @param def
-     * @param inventory
      */
-    public Boss(String enemyType, int hp, int def, ArrayList<Item> inventory)
+    public Boss(String enemyType, int hp, int def)
     {
-        super(enemyType, hp, def, inventory);
+        super(enemyType, hp, def);
 
     }
 
@@ -54,10 +53,10 @@ public class Boss extends Monster implements Damage
      *
      */
     @Override
-    public int Attack(int damage)
+    public int Attack()
     {
         //Boss has stronger attacks, so DiceTwenty and DiceSix are each rolled and added together
-        damage = Dice.rollDiceTwenty() + Dice.rollDiceSix();
+        int damage = Dice.rollDiceTwenty() + Dice.rollDiceSix();
 
         return damage;
     }
@@ -92,5 +91,4 @@ public class Boss extends Monster implements Damage
     {
         return super.getEnemyType();
     }
-
 }
