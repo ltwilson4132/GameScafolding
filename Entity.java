@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public abstract class Entity implements Damage
+public abstract class Entity
 {
     //protected String entityType;
     protected int health;
@@ -54,10 +54,5 @@ public abstract class Entity implements Damage
     public void setDefense(int defense)
     {
         this.defense = defense;
-    }
-
-    @Override
-    public int Attack() {
-        return 0;
     }
 }
