@@ -33,12 +33,11 @@ public class BattleSystem //extends Dice Should not extend Dice. BattleSystem us
         return winnerText;
     }
 
-
+    // Uses to test health, and if death happens, break the code in startBattle while loop
     public static boolean testDeath(Character player, Monster enemy)
     {
         if(player.health <= 0)
         {
-            player.Respawn(player);
             winnerText = enemy.getEnemyType();
             return true;
         }
@@ -57,7 +56,7 @@ public class BattleSystem //extends Dice Should not extend Dice. BattleSystem us
         System.out.println("What would you like to do?");
         System.out.println("1. Attack");
         System.out.println(" 2. Inventory");;
-        while(!testVar.equals("attack") && !testVar.equals("inventory"))
+        while(!testVar.equals("attack") && !testVar.equals("inventory")) // Asks either attack or inventory
         {
             System.out.println("Please enter a valid choice");
             testVar = kb.nextLine().toLowerCase();
@@ -80,7 +79,7 @@ public class BattleSystem //extends Dice Should not extend Dice. BattleSystem us
                 Turn(player, enemy);
             } else if (player.cInventory.get(userInput.toUpperCase()) != null)
             { // checks against null, if not null, will work
-                player.UseItem(player, player.cInventory.get(userInput));
+                player.UseItem(player.cInventory.get(userInput));
             }
         }
     }
@@ -108,7 +107,7 @@ public class BattleSystem //extends Dice Should not extend Dice. BattleSystem us
                 System.out.println("\n");
 
                 dmgRoll = d6.rollDiceSix();
-                defender.setHealth(defender.health -= dmgRoll);
+                defender.setHealth(defender.health -= dmgRoll); // damage (function)
                 System.out.println("Hit for " + dmgRoll);
                 System.out.println("defender's health " + defender.getHealth());
                 kb.nextLine();
