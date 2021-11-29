@@ -55,7 +55,7 @@ public class BattleSystem //extends Dice Should not extend Dice. BattleSystem us
         String testVar = "";
         System.out.println("What would you like to do?");
         System.out.println("1. Attack");
-        System.out.println(" 2. Inventory");;
+        System.out.println("2. Inventory");;
         while(!testVar.equals("attack") && !testVar.equals("inventory")) // Asks either attack or inventory
         {
             System.out.println("Please enter a valid choice");
