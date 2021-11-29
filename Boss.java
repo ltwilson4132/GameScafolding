@@ -6,7 +6,7 @@
  * Author's name and email: Steven Caleb Rains rainss@etsu.edu
  * Course-Section: CSCI-1260-003
  * Creation Date: 11/11/21
- * Last modified: 11/14/21
+ * Last modified: 11/28/21
  * -------------------------------------------------------------------------------
  */
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ public class Boss extends Monster implements Damage
      * @param def
      * @param inventory
      */
-    public Boss(MonsterType enemyType, int hp, int def, ArrayList<Item> inventory)
+    public Boss(String enemyType, int hp, int def, ArrayList<Item> inventory)
     {
         super(enemyType, hp, def, inventory);
 
@@ -76,7 +76,7 @@ public class Boss extends Monster implements Damage
      * <hr>
      *
      */
-    public void setEnemyType(MonsterType monsterType)
+    public void setEnemyType(String monsterType)
     {
         this.enemyType = enemyType;
     }
@@ -91,4 +91,10 @@ public class Boss extends Monster implements Damage
      * <hr>
      *
      */
+    @Override
+    public String getEnemyType()
+    {
+        return super.getEnemyType();
+    }
+
 }
