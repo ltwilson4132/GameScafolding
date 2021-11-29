@@ -99,7 +99,7 @@ public class Boss extends Monster implements Damage
      *
      * <hr>
      * Date created: 11/18/2021 <br>
-     * Date last modified: 11/29/2021 <br>
+     * Date last modified: 11/26/2021 <br>
      * <hr>
      *
      * @param name
@@ -118,7 +118,7 @@ public class Boss extends Monster implements Damage
      *
      * <hr>
      * Date created: 11/18/2021 <br>
-     * Date last modified: 11/29/2021 <br>
+     * Date last modified: 11/26/2021 <br>
      * <hr>
      *
      * @param name

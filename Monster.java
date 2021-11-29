@@ -27,41 +27,70 @@ public class Monster extends Entity implements Damage
     private int defenseBoost;
     private ItemType item;
 
-    public Monster(String enemyType, int hp, int def, ArrayList<Item> inventory)
+    /**
+     * Method Name: Monster <br>
+     * Method Purpose: Constructor for Monster that inherits from Entity <br>
+     *
+     * <hr>
+     * Date created: 11/27/2021 <br>
+     * Date last modified: 11/27/2021 <br>
+     * <hr>
+     *
+     * @param enemyType
+     * @param hp
+     * @param def
+     * @param inventory
+     */
+    public Monster(String enemyType, int hp, int def, ArrayList<Item> inventory) //constructor that calls the super
     {
         super(hp, def);
         this.enemyType = enemyType;
     }
 
+    /**
+     * Method Name: getEnemyType <br>
+     * Method Purpose: getter for enemy type <br>
+     *
+     * <hr>
+     * Date created: 11/27/2021 <br>
+     * Date last modified: 11/27/2021 <br>
+     * <hr>
+     *
+     */
     public String getEnemyType()
     {
         return enemyType;
     }
 
+    /**
+     * Method Name: setEnemyType <br>
+     * Method Purpose: setter for EnemyType <br>
+     *
+     * <hr>
+     * Date created: 11/27/2021 <br>
+     * Date last modified: 11/27/2021 <br>
+     * <hr>
+     *
+     * @param enemyType
+     */
     public void setEnemyType(String enemyType)
     {
         this.enemyType = enemyType;
     }
 
+    /**
+     * Method Name: Attack <br>
+     * Method Purpose: Attack method for monster, rolls a dice twenty<br>
+     *
+     * <hr>
+     * Date created: 11/27/2021 <br>
+     * Date last modified: 11/27/2021 <br>
+     * <hr>
+     *
+     */
     public int Attack()
     {
         return Dice.rollDiceTwenty();
-    }
-
-    //take out where it's expecting a character called player in the use item
-    public void useItem (String name)
-    {
-        if (item == ItemType.HEALING)
-        {
-            this.health = this.health + 20;
-        } else if (item == ItemType.ATTACK_BOOST)
-        {
-            this.attackBoost = this.attackBoost + 2;
-        } else
-        {
-            this.defenseBoost = this.defenseBoost +2;
-        }
-        cInventory.remove(item);
     }
 
     /**
@@ -69,8 +98,8 @@ public class Monster extends Entity implements Damage
      * Method Purpose: adds item to inventory <br>
      *
      * <hr>
-     * Date created: 11/18/2021 <br>
-     * Date last modified: 11/28/2021 <br>
+     * Date created: 11/27/2021 <br>
+     * Date last modified: 11/27/2021 <br>
      * <hr>
      *
      * @param name
@@ -86,8 +115,8 @@ public class Monster extends Entity implements Damage
      * Method Purpose: drops item from inventory <br>
      *
      * <hr>
-     * Date created: 11/18/2021 <br>
-     * Date last modified: 11/28/2021 <br>
+     * Date created: 11/27/2021 <br>
+     * Date last modified: 11/27/2021 <br>
      * <hr>
      *
      * @param name
