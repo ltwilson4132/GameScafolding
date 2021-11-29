@@ -70,17 +70,21 @@ public class Character extends Entity implements Damage
     //Uses an item and applies the effect to the player
     public void UseItem(ItemType item)
     {
+        String name = "";
         if (item == ItemType.HEALING)
         {
-            this.health = this.health + 20;
+            this.health += 20;
+            name = "Healing Potion";
         } else if (item == ItemType.ATTACK_BOOST)
         {
             this.attackBoost = this.attackBoost + 2;
+            name = "Attack Boost";
         } else
         {
             this.defenseBoost = this.defenseBoost + 2;
+            name = "Defense Boost";
         }
-        cInventory.remove(item);
+        cInventory.remove(name);
     }
 
     //Added getters and setters
