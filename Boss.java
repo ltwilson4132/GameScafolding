@@ -35,10 +35,11 @@ public class Boss extends Monster implements Damage
      * @param enemyType
      * @param hp
      * @param def
+     * @param inventory
      */
-    public Boss(String enemyType, int hp, int def)
+    public Boss(String enemyType, int hp, int def, ArrayList<Item> inventory)
     {
-        super(enemyType, hp, def);
+        super(enemyType, hp, def, inventory);
 
     }
 
@@ -53,10 +54,10 @@ public class Boss extends Monster implements Damage
      *
      */
     @Override
-    public int Attack()
+    public int Attack(int damage)
     {
         //Boss has stronger attacks, so DiceTwenty and DiceSix are each rolled and added together
-        int damage = Dice.rollDiceTwenty() + Dice.rollDiceSix();
+        damage = Dice.rollDiceTwenty() + Dice.rollDiceSix();
 
         return damage;
     }
@@ -91,4 +92,41 @@ public class Boss extends Monster implements Damage
     {
         return super.getEnemyType();
     }
+
+    /**
+     * Method Name: dropFromInventory<br>
+     * Method Purpose: drop item from inventory <br>
+     *
+     * <hr>
+     * Date created: 11/18/2021 <br>
+     * Date last modified: 11/29/2021 <br>
+     * <hr>
+     *
+     * @param name
+     */
+    public Item dropFromInventory(String name)
+    {
+        Item item;
+        item = cInventory.get(name);
+        cInventory.remove(item);
+        return item;
+    }
+
+    /**
+     * Method Name: addToInventory<br>
+     * Method Purpose: adds item to inventory <br>
+     *
+     * <hr>
+     * Date created: 11/18/2021 <br>
+     * Date last modified: 11/29/2021 <br>
+     * <hr>
+     *
+     * @param name
+     * @param item
+     */
+    public void addToInventory(String name, Item item)
+    {
+        cInventory.put(name, item);
+    }
+
 }
