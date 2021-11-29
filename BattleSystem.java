@@ -70,7 +70,7 @@ public class BattleSystem //extends Dice Should not extend Dice. BattleSystem us
             /*for (String name:player.cInventory.keySet()) {
                 System.out.println(name);
             }*/
-            player.Inventory();
+            player.Inventory(player);
             String userInput = kb.nextLine();
             if (player.cInventory.get(userInput) == null)
             {

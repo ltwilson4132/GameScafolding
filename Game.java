@@ -53,26 +53,32 @@ public class Game
 
     public Game()
     {
+        //Adds type of forest monsters to choose from.
         forestMonsters.add("Gremlin");
         forestMonsters.add("Zombie");
         forestMonsters.add("Spider");
 
+        //Adds type of desert monsters to choose from.
         desertMonsters.add("Mummy");
         desertMonsters.add("Sand Worm");
         desertMonsters.add("Evil Cactus");
 
+        //Adds type of cave monsters to choose from.
         caveMonsters.add("Shadow Creature");
         caveMonsters.add("Rock Golem");
         caveMonsters.add("Ghost");
 
+        //Adds type of castle monsters to choose from.
         castleMonsters.add("Shadow Knight");
         castleMonsters.add("Witch");
         castleMonsters.add("Shadow Archer");
 
+        //Adds type of moon monsters to choose from.
         moonMonsters.add("Mickey Mouse");
         moonMonsters.add("Cheese Monster");
         moonMonsters.add("Cosmonaut");
 
+        //Adds different types of items to randomly generate.
         items.add("Healing Potion");
         items.add("Attack Boost");
         items.add("Defense Boost");
@@ -82,20 +88,26 @@ public class Game
     {
         try
         {
+            //Loads the game map from a text file. Changing the text file can change or add locations.
             ReadFile.readLocations("GameMap.txt", gameMap);
         }
         catch (FileNotFoundException ex)
         {
             System.out.println(ex);
         }
+        //This fills all of the locations with a random number of monsters.
         SpawnMonsters();
+        //Prints welcome message to the player.
         System.out.println("Welcome to the game. You will have to fight your way through " + gameMap.size() + " locations with a boss at the end of each location." + "\n" +
                 "To get started create your character\n");
+        //Creates a new Character object called player
         player = CreateCharacter();
+        //Prints out player's initial stats.
         System.out.println("Character Name: " + player.getName() + "\n" +
                 "Character Class: " + player.getType().value + "\n" +
                 "Character Health: " + player.getHealth() + "\n" +
                 "Character Defense: " + player.getDefense());
+        //Moves player to the first location in the game map to start the game.
         player.setCurrentLocation(gameMap.get(0));
     }
 
@@ -133,7 +145,7 @@ public class Game
                             if (input.nextLine().toLowerCase().equals("yes"))
                             {
                                 player.addToInventory(droppedItem.value, droppedItem);
-                                System.out.println("You added a " + droppedItem.value + " to your inventory");
+                                System.out.println("You added a " + droppedItem.value + " to your inventory\n");
                             }
                         }
                     }
@@ -198,10 +210,13 @@ public class Game
         {
             System.out.println("Would you like to continue?" + "\n" + "Yes or No");
             userInput = input.nextLine().toLowerCase();
+            //If the player chooses to continue
             if (userInput.equals("yes"))
             {
+                //If the player is a Wizard then we reset their health to 120, else it is set to 100
                 if (player.getType() == CharacterType.WIZARD) player.setHealth(120);
                 else player.setHealth(100);
+                //Respawns monsters in all the locations
                 SpawnMonsters();
                 System.out.println("New monsters will be respawned and you will have to go back to the previous location");
                 if(player.getCurrentLocation().getLocationName().equals("Desert")) player.setCurrentLocation(gameMap.get(0));
@@ -353,7 +368,7 @@ public class Game
 
     public void SpawnBosses()
     {
-        Boss forestBoss = new Boss("Grizzly Bear", Dice.RandomRange(50, 75), 10);
+        Boss forestBoss = new Boss("Grizzly Bear", Dice.RandomRange(5, 10), 1);
         GenerateItem(forestBoss);
         gameMap.get(0).AddMonster(forestBoss);
 
@@ -369,7 +384,7 @@ public class Game
         GenerateItem(castleBoss);
         gameMap.get(3).AddMonster(castleBoss);
 
-        Boss moonBoss = new Boss("King Rat", Dice.RandomRange(175, 200), 10);
+        Boss moonBoss = new Boss("King Rat", Dice.RandomRange(175, 200), 1);
         GenerateItem(moonBoss);
         gameMap.get(4).AddMonster(moonBoss);
     }

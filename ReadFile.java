@@ -74,31 +74,26 @@ public class ReadFile
      * @param path
      *
      */
-    public static ArrayList<Location> readLocations(String path)
+    public static void readLocations(String path, ArrayList<Location> locations) throws FileNotFoundException
     {
-        ArrayList<Location> locations = new ArrayList<>(); //newing up array list for locations
+        locations.clear();
+        //ArrayList<Location> locations = new ArrayList<>();
         String locationEntry;
 
-        //try/catch for file not found exception
         try(BufferedReader myLocationReader = new BufferedReader(new FileReader(path)))
         {
-            while((locationEntry = myLocationReader.readLine()) != null) // while there is another line, myLocation Reader will read it
-            {
-                String[] locationInfo = locationEntry.split(","); //breaks up String based on commas
+                while((locationEntry = myLocationReader.readLine()) != null)
+                {
+                    String[] locationInfo = locationEntry.split(",");
 
-                // sets the information between commas into indexes of array
-                Location location = new Location(locationInfo[0], locationInfo[1], Integer.parseInt(locationInfo[2]));
+                    Location location = new Location(locationInfo[0], locationInfo[1], Integer.parseInt(locationInfo[2]));
 
-                locations.add(location); //adds the location information into a location
-            }
-        }
+                    locations.add(location);
+                }//end while
+        }//end try
         catch(IOException exc)
         {
             System.out.println("File not found!");
         }
-
-        return locations; //returns the location
     }
 }
-
-
