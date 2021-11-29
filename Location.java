@@ -3,68 +3,79 @@ import java.util.ArrayList;
 public class Location
 {
     private String locationName, locationDescription;
-    private int size;
-    private ArrayList<Monster> monsters = new ArrayList<Monster>();
+    final int size; //How many enemies it can hold
+    private ArrayList<Monster> monsters;
 
     public Location(String locationName, String locationDescription, int size)
     {
         this.locationName = locationName;
         this.locationDescription = locationDescription;
         this.size = size;
+        monsters = new ArrayList<>(size);
+        //Equals max size that location can hold
+        //Generates random number of Monsters between 0 and the max size of the location and adds them to the ArrayList
     }
 
-    //Method that gets the name of a Location;
     public String getLocationName()
     {
         return locationName;
     }
 
-    //Method that sets the name of a Location
     public void setLocationName(String locationName)
     {
         this.locationName = locationName;
     }
 
-    //Method that gets the description of a Location
     public String getLocationDescription()
     {
         return locationDescription;
     }
 
-    //Method that will set the description of a Location
     public void setLocationDescription(String locationDescription)
     {
         this.locationDescription = locationDescription;
     }
 
-    //Method that gets the size of a Location
     public int getSize()
     {
         return size;
     }
 
-    //Method that prints out all the monsters in an area
+    public Monster GetMonster(int index)
+    {
+        //Outputs String representing all monster at location.
+        return monsters.get(index);
+    }
+
     public String getMonsters()
     {
-        String monsterList;
-
-        monsterList = "Monsters in this Location: " + monsters + "\n";
-        for (Monster monster:monsters) //Lists every monster in that location
+        String monsterList = "";
+        for (Monster monster:monsters)
         {
-            monsterList += monster + "\n";
+            monsterList += monster.getEnemyType() + "\n";
         }
         return monsterList;
     }
 
-    //Method that adds a monster to the Location's ArrayList
-    public void addMonster(Monster monster)
+    public ArrayList<Monster> getMonstersArray()
     {
+        return monsters;
+    }
+
+    public void AddMonster(Monster monster)
+    {
+        //Adds a new monster to the location's ArrayList
         monsters.add(monster);
     }
 
-    //Method that removes a monster from the ArrayList when it is killed
     public void removeMonster(Monster monster)
     {
+        //Removes a monster from the ArrayList when one is killed
         monsters.remove(monster);
     }
-}//end class Location
+
+    public void ClearMonsters()
+    {
+        monsters.clear();
+    }
+}
