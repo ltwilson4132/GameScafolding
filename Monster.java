@@ -23,11 +23,11 @@ import java.util.ArrayList;
 public class Monster extends Entity implements Damage
 {
     protected String enemyType;
-    private int attackBoost;
-    private int defenseBoost;
-    private ItemType item;
+    protected int attackBoost;
+    protected int defenseBoost;
+    protected ItemType item;
 
-    public Monster(String enemyType, int hp, int def, ArrayList<Item> inventory)
+    public Monster(String enemyType, int hp, int def)
     {
         super(hp, def);
         this.enemyType = enemyType;
@@ -48,33 +48,25 @@ public class Monster extends Entity implements Damage
         return Dice.rollDiceTwenty();
     }
 
+    @Override
     //take out where it's expecting a character called player in the use item
-    public void useItem (String name)
+    public void UseItem (ItemType item)
     {
-        if (item == ItemType.HEALING)
-        {
-            this.health = this.health + 20;
-        } else if (item == ItemType.ATTACK_BOOST)
-        {
-            this.attackBoost = this.attackBoost + 2;
-        } else
-        {
-            this.defenseBoost = this.defenseBoost +2;
-        }
-        cInventory.remove(item);
+
     }
 
+    @Override
     public void addToInventory (String name, ItemType item)
     {
         cInventory.put(name, item);
     }
 
-    public Item dropFromInventory(String name)
+    @Override
+    public ItemType dropFromInventory(String name)
     {
-        Item item;
+        ItemType item;
         item = cInventory.get(name);
         cInventory.remove(item);
         return item;
     }
-
 }//end class Monster
