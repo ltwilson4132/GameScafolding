@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 //Add Enum for Character type and monster type.
 public class Character extends Entity implements Damage
 {
@@ -7,7 +5,6 @@ public class Character extends Entity implements Damage
     private String  name;
     private Location currentLocation;
     private int attackBoost, defenseBoost;
-    Scanner kb = new Scanner(System.in);
     //private int movement;
     //ArrayList<Item> inventory = new ArrayList<Item>(); Commented out because not needed. Inherits inventory from Entity.
 
