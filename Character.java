@@ -5,9 +5,8 @@ public class Character extends Entity implements Damage
     private String  name;
     private Location currentLocation;
     private int attackBoost, defenseBoost;
-    //private int movement;
-    //ArrayList<Item> inventory = new ArrayList<Item>(); Commented out because not needed. Inherits inventory from Entity.
 
+    //Constructor for a new Character, this also adds the +2 defense bonus for the KNIGHT class
     public Character(String name, CharacterType characterClass, int hp, int def)
     {
         super(hp, def);
@@ -23,10 +22,9 @@ public class Character extends Entity implements Damage
         this.name = name; //Added to set name field.
     }
 
-    public void Inventory(Character player)//Changed because inventory is an ArrayList of Item objects.
+    //Shows the user what items they currently have
+    public void Inventory(Character player)
     {
-        //This method will show the user what items they currently have
-
         if (!cInventory.isEmpty())
         {
             for (String name : player.cInventory.keySet())
@@ -39,6 +37,7 @@ public class Character extends Entity implements Damage
             }
     }
 
+    //Adds the +2 bonus for the ARCHER class to any d20 attack rolls
     public int Attack()
     {
         if (type.equals("ARCHER"))
@@ -50,7 +49,62 @@ public class Character extends Entity implements Damage
         }
     }
 
+
+    //Adds an item to the player's inventory
+    @Override
+    public void addToInventory(String name, ItemType item)
+    {
+        cInventory.put(name, item);
+    }
+
+    //Deletes an item from the player's inventory
+    @Override
+    public ItemType dropFromInventory(String name)
+    {
+        ItemType item;
+        item = cInventory.get(name);
+        cInventory.remove(item);
+        return item;
+    }
+
+    //Uses an item and applies the effect to the player
+    @Override
+    public void UseItem(ItemType item)
+    {
+        if (item == ItemType.HEALING)
+        {
+            this.health = this.health + 20;
+        } else if (item == ItemType.ATTACK_BOOST)
+        {
+            this.attackBoost = this.attackBoost + 2;
+        } else
+        {
+            this.defenseBoost = this.defenseBoost + 2;
+        }
+        cInventory.remove(item);
+    }
+
     //Added getters and setters
+    public int getAttackBoost()
+    {
+        return attackBoost;
+    }
+
+    public void setAttackBoost(int attackBoost)
+    {
+        this.attackBoost = attackBoost;
+    }
+
+    public int getDefenseBoost()
+    {
+        return defenseBoost;
+    }
+
+    public void setDefenseBoost(int defenseBoost)
+    {
+        this.defenseBoost = defenseBoost;
+    }
+
     public CharacterType getType()
     {
         return type;
@@ -70,7 +124,7 @@ public class Character extends Entity implements Damage
     {
         this.name = name;
     }
-    
+
     public Location getCurrentLocation()
     {
         return currentLocation;
@@ -79,56 +133,5 @@ public class Character extends Entity implements Damage
     public void setCurrentLocation(Location currentLocation)
     {
         this.currentLocation = currentLocation;
-    }
-    
-    @Override
-    public void addToInventory(String name, ItemType item)
-    {
-        cInventory.put(name, item);
-    }
-
-    @Override
-    public ItemType dropFromInventory(String name)
-    {
-        ItemType item;
-        item = cInventory.get(name);
-        cInventory.remove(item);
-        return item;
-    }
-
-    @Override
-    public void UseItem(ItemType item)
-    {
-        if (item == ItemType.HEALING)
-        {
-            this.health = this.health + 20;
-        } else if (item == ItemType.ATTACK_BOOST)
-        {
-            this.attackBoost = this.attackBoost + 2;
-        } else
-        {
-            this.defenseBoost = this.defenseBoost + 2;
-        }
-        cInventory.remove(item);
-    }
-    
-    public int getAttackBoost()
-    {
-        return attackBoost;
-    }
-
-    public void setAttackBoost(int attackBoost)
-    {
-        this.attackBoost = attackBoost;
-    }
-
-    public int getDefenseBoost()
-    {
-        return defenseBoost;
-    }
-
-    public void setDefenseBoost(int defenseBoost)
-    {
-        this.defenseBoost = defenseBoost;
     }
 }
