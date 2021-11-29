@@ -1,6 +1,13 @@
 public enum ItemType
 {
-    HEALING,
-    ATTACK_BOOST,
-    DEFENSE_BOOST;
+    HEALING("Health Potion"),
+    ATTACK_BOOST("Attack Boost"),
+    DEFENSE_BOOST("Defense Boost");
+
+    String value;
+
+    ItemType(String type)
+    {
+        value = type;
+    }
 }
