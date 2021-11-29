@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 //Add Enum for Character type and monster type.
@@ -7,15 +6,25 @@ public class Character extends Entity implements Damage
     private CharacterType type;
     private String  name;
     private Location currentLocation;
+    private ItemType item;
+    private int attackBoost, defenseBoost;
     Scanner kb = new Scanner(System.in);
     //private int movement;
     //ArrayList<Item> inventory = new ArrayList<Item>(); Commented out because not needed. Inherits inventory from Entity.
 
     public Character(String name, CharacterType characterClass, int hp, int def)
     {
-        super(hp, def); //Removed name
+        super(hp, def);
+        attackBoost = 0;
+        if (characterClass == CharacterType.KNIGHT)
+        {
+            defenseBoost = 2;
+        } else
+        {
+            defenseBoost = 0;
+        }
         this.type = characterClass;
-        this.name = name;//Added to set name field.
+        this.name = name; //Added to set name field.
     }
 
     public void Inventory(Character player)//Changed because inventory is an ArrayList of Item objects.
@@ -34,7 +43,7 @@ public class Character extends Entity implements Damage
             }
     }
 
-    public void Respawn(Character player)
+    public String Respawn(Character player)
     {
         //Player should get an option to respawn or quit.
         //Respawn will set players health back to full and move them to the previous location
@@ -56,10 +65,10 @@ public class Character extends Entity implements Damage
     {
         if (type.equals("ARCHER"))
         {
-            return Dice.rollDiceTwenty() + 2;
+            return Dice.rollDiceTwenty() + 2 + attackBoost;
         } else
         {
-            return Dice.rollDiceTwenty();
+            return Dice.rollDiceTwenty() + attackBoost;
         }
     }
 
@@ -97,19 +106,32 @@ public class Character extends Entity implements Damage
     @Override
     public void addToInventory(String name, ItemType item)
     {
-        
+        cInventory.put(name, item);
     }
 
     @Override
-    public void dropFromInventory(String name)
+    public ItemType dropFromInventory(String name)
     {
-
+        ItemType item;
+        item = cInventory.get(name);
+        cInventory.remove(item);
+        return item;
     }
 
     @Override
-    public void UseItem(Character player, ItemType item)
+    public void UseItem(ItemType item)
     {
-
+        if (item == ItemType.HEALING)
+        {
+            this.health = this.health + 20;
+        } else if (item == ItemType.ATTACK_BOOST)
+        {
+            this.attackBoost = this.attackBoost + 2;
+        } else
+        {
+            this.defenseBoost = this.defenseBoost + 2;
+        }
+        cInventory.remove(item);
     }
 
 }
