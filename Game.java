@@ -119,12 +119,23 @@ public class Game
                             "Health: " + player.getHealth() + "\n" +
                             "Total Defense: " + (player.getDefense() + player.getDefenseBoost()) + "\n" +
                             "Attack Boost: +" + player.getAttackBoost() + " per roll");
-                    if (!monster.cInventory.isEmpty())
+                    if (!(monster.cInventory.isEmpty()))
                     {
-                        ItemType droppedItem = monster.dropFromInventory("test");
-                        System.out.println("The monster dropped a " + droppedItem.value + ".\n" +
-                                "Would you like to add this item to your inventory?");
-                        if (input.nextLine().toLowerCase().equals("yes")) player.addToInventory(droppedItem.value, droppedItem);
+                        ItemType droppedItem = monster.dropFromInventory(monster.Inventory());
+                        System.out.println("The monster dropped a " + droppedItem.value + ".\n");
+                        if(player.cInventory.containsKey(droppedItem.value))
+                        {
+                            System.out.println("You already have a " + droppedItem.value + " in your inventory and you can't carry anymore.");
+                        }
+                        else
+                        {
+                                System.out.println("Would you like to add this item to your inventory?");
+                            if (input.nextLine().toLowerCase().equals("yes"))
+                            {
+                                player.addToInventory(droppedItem.value, droppedItem);
+                                System.out.println("You added a " + droppedItem.value + " to your inventory");
+                            }
+                        }
                     }
                 }
                 else
@@ -316,9 +327,9 @@ public class Game
 
     public void GenerateItem(Monster monster)
     {
-        int itemSelection = Dice.generateRandomNum(4);
+        int itemSelection = Dice.generateRandomNum(6);
 
-        if (itemSelection == 3)
+        if (itemSelection >= 3)
         {
 
         }
