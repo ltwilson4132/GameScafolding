@@ -102,7 +102,7 @@ public class BattleSystem //extends Dice Should not extend Dice. BattleSystem us
             int dmgRoll;
             if (testDice >= 20) // crit
             {
-                System.out.println("Critcal!");
+                System.out.println("Critical!");
                 kb.nextLine();
                 System.out.println("\n");
 
