@@ -6,7 +6,6 @@ public class Character extends Entity implements Damage
     private CharacterType type;
     private String  name;
     private Location currentLocation;
-    private ItemType item;
     private int attackBoost, defenseBoost;
     Scanner kb = new Scanner(System.in);
     //private int movement;
@@ -41,24 +40,6 @@ public class Character extends Entity implements Damage
             {
             System.out.println("Your inventory is empty");
             }
-    }
-
-    public String Respawn(Character player)
-    {
-        //Player should get an option to respawn or quit.
-        //Respawn will set players health back to full and move them to the previous location
-        System.out.println("Would you like to continue?" + "\n" + "Yes or No");
-        if (kb.nextLine().contains("yes"))
-        {
-            if(this.type.value.equals("Wizard")) this.health = 120;
-            else this.health = 100;
-            Game.SpawnMonsters();
-        } else
-        {
-            System.out.println("Thank you for playing!");
-            System.exit(0);
-        }
-        return "";
     }
 
     public int Attack()
@@ -133,5 +114,24 @@ public class Character extends Entity implements Damage
         }
         cInventory.remove(item);
     }
+    
+    public int getAttackBoost()
+    {
+        return attackBoost;
+    }
 
+    public void setAttackBoost(int attackBoost)
+    {
+        this.attackBoost = attackBoost;
+    }
+
+    public int getDefenseBoost()
+    {
+        return defenseBoost;
+    }
+
+    public void setDefenseBoost(int defenseBoost)
+    {
+        this.defenseBoost = defenseBoost;
+    }
 }
