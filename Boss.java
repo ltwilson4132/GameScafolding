@@ -54,13 +54,9 @@ public class Boss extends Monster implements Damage
      *
      */
     @Override
-    public int Attack()
+    public int Attack(int damage)
     {
-        int damage;
-        Character player = null;
-
         //Boss has stronger attacks, so DiceTwenty and DiceSix are each rolled and added together
-        // before subtracting player defense to return damage dealt
         damage = Dice.rollDiceTwenty() + Dice.rollDiceSix();
 
         return damage;
