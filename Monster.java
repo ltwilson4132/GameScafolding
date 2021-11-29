@@ -129,4 +129,17 @@ public class Monster extends Entity implements Damage
         return item;
     }
 
+    
+    public String Inventory()
+    {
+        String monsterItem = "";
+        if (!cInventory.isEmpty())
+        {
+            for (String name : cInventory.keySet())
+            {
+                monsterItem += name;
+            }
+        }
+        return monsterItem;
+    }
 }//end class Monster
