@@ -21,6 +21,11 @@ public class Character extends Entity implements Damage
         this.type = characterClass;
         this.name = name; //Added to set name field.
     }
+    
+    public Character()
+    {
+        super(0,0);
+    }
 
     //Shows the user what items they currently have
     public void Inventory(Character player)
