@@ -17,7 +17,7 @@ import java.util.ArrayList;
  *
  * <hr>
  * Date created: 11/11/21<br>
- * Last modified: 11/14/21
+ * Last modified: 11/28/21
  * @author Steven Caleb Rains
  */
 public class Boss extends Monster implements Damage

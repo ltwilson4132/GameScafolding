@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Author's name and email: Steven Caleb Rains rainss@etsu.edu
  * Course-Section: CSCI-1250-900
  * Creation Date: 10/27/21
- * Last modified: 11/28/21
+ * Last modified: 11/29/21
  * -------------------------------------------------------------------------------
  */
 
@@ -26,36 +26,99 @@ public class Monster extends Entity implements Damage
     protected int attackBoost;
     protected int defenseBoost;
     protected ItemType item;
-    protected boolean alive;
 
+    /**
+     * Method Name: Monster<br>
+     * Method Purpose: constructor for Monster, parent class Entity <br>
+     *
+     * <hr>
+     * Date created: 11/27/2021 <br>
+     * Date last modified: 11/27/2021 <br>
+     * <hr>
+     *
+     * @param enemyType
+     * @param hp
+     * @param def
+     */
     public Monster(String enemyType, int hp, int def)
     {
         super(hp, def);
         this.enemyType = enemyType;
-        alive = true;
     }
 
+    /**
+     * Method Name: getEnemyType<br>
+     * Method Purpose: getter for enemy type <br>
+     *
+     * <hr>
+     * Date created: 11/27/2021 <br>
+     * Date last modified: 11/27/2021 <br>
+     * <hr>
+     *
+     */
     public String getEnemyType()
     {
         return enemyType;
     }
 
+    /**
+     * Method Name: setEnemyType<br>
+     * Method Purpose: setter for enemy type <br>
+     *
+     * <hr>
+     * Date created: 11/27/2021 <br>
+     * Date last modified: 11/27/2021 <br>
+     * <hr>
+     *
+     * @param enemyType
+     */
     public void setEnemyType(String enemyType)
     {
         this.enemyType = enemyType;
     }
 
+    /**
+     * Method Name: Attack<br>
+     * Method Purpose: monster attack method <br>
+     *
+     * <hr>
+     * Date created: 11/27/2021 <br>
+     * Date last modified: 11/27/2021 <br>
+     * <hr>
+     *
+     */
     public int Attack()
     {
         return Dice.rollDiceTwenty();
     }
 
+    /**
+     * Method Name: addToInventory<br>
+     * Method Purpose: adds item to monster's inventory <br>
+     *
+     * <hr>
+     * Date created: 11/11/2021 <br>
+     * Date last modified: 11/28/2021 <br>
+     * <hr>
+     *
+     */
     @Override
     public void addToInventory (String name, ItemType item)
     {
         cInventory.put(name, item);
     }
 
+    /**
+     * Method Name: dropFromInventory<br>
+     * Method Purpose:  drops item from monster's inventory<br>
+     *
+     * <hr>
+     * Date created: 11/27/2021 <br>
+     * Date last modified: 11/27/2021 <br>
+     * <hr>
+     *
+     * @param name
+     */
     @Override
     public ItemType dropFromInventory(String name)
     {
@@ -65,26 +128,26 @@ public class Monster extends Entity implements Damage
         return item;
     }
 
+    /**
+     * Method Name: Inventory<br>
+     * Method Purpose: gives monster an item in inventory <br>
+     *
+     * <hr>
+     * Date created: 11/29/2021 <br>
+     * Date last modified: 11/29/2021 <br>
+     * <hr>
+     *
+     */
     public String Inventory()
     {
-        String monsterItem = "";
-        if (!cInventory.isEmpty())
+        String monsterItem = ""; //initializing monsterItem
+        if (!cInventory.isEmpty()) //if the monster has an item it returns an item, if it has no item it returns a null
         {
-            for (String name : cInventory.keySet())
+            for (String name : cInventory.keySet()) //takes all the keys from the inventory hashmap and puts them in a set and goes through every item in the set and adds it to monsterItem
             {
                 monsterItem += name;
             }
         }
         return monsterItem;
     }
-    
-    public boolean isAlive()
-    {
-        return alive;
-    }
-
-    public void setAlive(boolean alive)
-    {
-        this.alive = alive;
-    }
-}//end class Monster
+}
