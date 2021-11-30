@@ -90,13 +90,13 @@ public class BattleSystem //extends Dice Should not extend Dice. BattleSystem us
         Dice d20 = new Dice();
 
         int testDice = attacker.Attack();
-        if(testDice < defender.defense)//miss
+        if(testDice < defender.getDefense())//miss
         {
             kb.nextLine();
             System.out.println("Miss...");
             attacker.Attack();
             System.out.println("\n");
-        } else if(testDice >= defender.defense)
+        } else if(testDice >= defender.getDefense())
         {
             Dice d6 = new Dice();
             int dmgRoll;
