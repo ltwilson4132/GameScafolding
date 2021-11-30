@@ -53,7 +53,12 @@ public class Character extends Entity implements Damage
             return Dice.rollDiceTwenty() + attackBoost;
         }
     }
-
+    
+    @Override
+    public int getDefense()
+    {
+        return this.defense + this.defenseBoost;
+    }
 
     //Adds an item to the player's inventory
     @Override
