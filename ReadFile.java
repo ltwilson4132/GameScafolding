@@ -31,34 +31,32 @@ public class ReadFile
      *
      * <hr>
      * Date created: 11/11/2021 <br>
-     * Date last modified: 11/29/2021 <br>
+     * Date last modified: 11/14/2021 <br>
      * <hr>
      *
      * @param player
      * @param map
      */
-    public static void LoadGame(Character player, HashMap<String, Location> map)
+    public static void LoadGame()
     {
-        Character savedPlayer = player;
-        HashMap<String, Location> savedMap = map;
-        try
-        {
-            File savedFile = new File("saveFile.txt"); //opens the file to be read from
-            Scanner saveReader = new Scanner(savedFile); // creates a Scanner to read from the file
+       try
+       {
+           File savedFile = new File("saveFile.txt"); //opens the file to be read from
+           Scanner saveReader = new Scanner(savedFile); // creates a Scanner to read from the file
 
-            while (saveReader.hasNextLine()) //while there is another line, the reader will read the data and then print it
-            {
-                String saveData = saveReader.nextLine();
-                System.out.println(saveData);
-            }
+           while (saveReader.hasNextLine()) //while there is another line, the reader will read the data and then print it
+           {
+               String saveData = saveReader.nextLine();
+               System.out.println(saveData);
+           }
 
-            saveReader.close(); // close the save file
-            System.out.println("Save loaded!");
-        }
-        catch (IOException notFound) // handles exception when save file is not found
-        {
-            System.out.println("Save data not found!");
-        }
+           saveReader.close(); // close the save file
+           System.out.println("Save loaded!");
+       }
+       catch (IOException notFound) // handles exception when save file is not found
+       {
+           System.out.println("Save data not found!");
+       }
     }
 
     /**
@@ -68,7 +66,7 @@ public class ReadFile
      *
      * <hr>
      * Date created: 11/22/21 <br>
-     * Date last modified: 11/29/21 <br>
+     * Date last modified: 11/22/21 <br>
      * <hr>
      *
      * @param path
@@ -82,14 +80,14 @@ public class ReadFile
 
         try(BufferedReader myLocationReader = new BufferedReader(new FileReader(path)))
         {
-            while((locationEntry = myLocationReader.readLine()) != null)
-            {
-                String[] locationInfo = locationEntry.split(",");
+                while((locationEntry = myLocationReader.readLine()) != null)
+                {
+                    String[] locationInfo = locationEntry.split(",");
 
-                Location location = new Location(locationInfo[0], locationInfo[1], Integer.parseInt(locationInfo[2]));
+                    Location location = new Location(locationInfo[0], locationInfo[1], Integer.parseInt(locationInfo[2]));
 
-                locations.add(location);
-            }//end while
+                    locations.add(location);
+                }//end while
         }//end try
         catch(IOException exc)
         {
@@ -97,19 +95,8 @@ public class ReadFile
         }
     }
 
-    /**
-     * Method Name: loadPlayer <br>
-     * Method Purpose: reads file ...<br>
-     *
-     * <hr>
-     * Date created: 11/29/21 <br>
-     * Date last modified: 11/29/21 <br>
-     * <hr>
-     *
-     * @param locations
-     *
-     */
-    public static void loadPlayer(ArrayList<Location> locations, Character player) throws FileNotFoundException {
+    public static void loadPlayer(ArrayList<Location> locations, Character player) //throws FileNotFoundException
+    {
         String entry;
         try (BufferedReader playerReader = new BufferedReader(new FileReader("SavedPlayer.txt")))
         {
@@ -154,7 +141,5 @@ public class ReadFile
         {
             exception.printStackTrace();
         }
-
     }
-
 }
