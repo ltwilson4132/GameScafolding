@@ -145,19 +145,42 @@ public class Monster extends Entity implements Damage
         String monsterItem = ""; //initializing monsterItem
         if (!cInventory.isEmpty()) //if the monster has an item it returns an item, if it has no item it returns a null
         {
-            for (String name : cInventory.keySet()) //takes all the keys from the inventory hashmap and puts them in a set and goes through every item in the set and adds it to monsterItem
+            //takes all the keys from the inventory hashmap and puts them in a set
+            // and goes through every item in the set and adds it to monsterItem
+            for (String name : cInventory.keySet())
             {
                 monsterItem += name;
             }
         }
         return monsterItem;
     }
-    
+
+    /**
+     * Method Name: isAlive<br>
+     * Method Purpose:  returns boolean alive<br>
+     *
+     * <hr>
+     * Date created: 11/29/2021 <br>
+     * Date last modified: 11/29/2021 <br>
+     * <hr>
+     *
+     */
     public boolean isAlive()
     {
         return alive;
     }
 
+    /**
+     * Method Name: setAlive<br>
+     * Method Purpose: sets monster status to alive <br>
+     *
+     * <hr>
+     * Date created: 11/29/2021 <br>
+     * Date last modified: 11/29/2021 <br>
+     * <hr>
+     *
+     * @param alive
+     */
     public void setAlive(boolean alive)
     {
         this.alive = alive;
