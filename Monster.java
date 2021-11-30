@@ -26,11 +26,13 @@ public class Monster extends Entity implements Damage
     protected int attackBoost;
     protected int defenseBoost;
     protected ItemType item;
+    protected boolean alive;
 
     public Monster(String enemyType, int hp, int def)
     {
         super(hp, def);
         this.enemyType = enemyType;
+        alive = true;
     }
 
     public String getEnemyType()
@@ -74,5 +76,15 @@ public class Monster extends Entity implements Damage
             }
         }
         return monsterItem;
+    }
+    
+    public boolean isAlive()
+    {
+        return alive;
+    }
+
+    public void setAlive(boolean alive)
+    {
+        this.alive = alive;
     }
 }//end class Monster
