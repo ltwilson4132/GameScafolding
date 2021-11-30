@@ -52,7 +52,10 @@ public class Location
         String monsterList = "";
         for (Monster monster:monsters)
         {
-            monsterList += monster.getEnemyType() + "\n";
+            if(monster.isAlive())
+            {
+                monsterList += monster.getEnemyType() + "\n";
+            }
         }
         return monsterList;
     }
@@ -71,7 +74,7 @@ public class Location
     public void removeMonster(Monster monster)
     {
         //Removes a monster from the ArrayList when one is killed
-        monsters.remove(monster);
+        monster.setAlive(false);
     }
 
     public void ClearMonsters()
