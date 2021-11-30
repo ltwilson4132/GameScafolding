@@ -90,17 +90,17 @@ public class BattleSystem //extends Dice Should not extend Dice. BattleSystem us
         Dice d20 = new Dice();
 
         int testDice = attacker.Attack();
-        if(testDice < defender.getDefense())//miss
+        if(testDice < defender.defense)// miss
         {
             kb.nextLine();
             System.out.println("Miss...");
             attacker.Attack();
             System.out.println("\n");
-        } else if(testDice >= defender.getDefense())
+        } else if(testDice >= defender.defense)
         {
             Dice d6 = new Dice();
             int dmgRoll;
-            if (testDice >= 20) // crit
+            if (testDice >= 20) // crit if rolled
             {
                 System.out.println("Critical!");
                 kb.nextLine();
@@ -108,6 +108,9 @@ public class BattleSystem //extends Dice Should not extend Dice. BattleSystem us
 
                 dmgRoll = d6.rollDiceSix();
                 defender.setHealth(defender.health -= dmgRoll); // damage (function)
+                if (defender.health < 0){
+                    defender.health = 0;
+                }
                 System.out.println("Hit for " + dmgRoll);
                 System.out.println("defender's health " + defender.getHealth());
                 kb.nextLine();
@@ -115,6 +118,9 @@ public class BattleSystem //extends Dice Should not extend Dice. BattleSystem us
 
                 dmgRoll = d6.rollDiceSix();
                 defender.setHealth(defender.health -= dmgRoll);
+                if (defender.health < 0){
+                    defender.health = 0;
+                }
                 System.out.println("Hit for " + dmgRoll);
                 System.out.println("defender's health " + defender.getHealth());
                 kb.nextLine();
@@ -128,6 +134,9 @@ public class BattleSystem //extends Dice Should not extend Dice. BattleSystem us
 
                     dmgRoll = d6.rollDiceSix();
                     defender.setHealth(defender.health -= dmgRoll);
+                    if (defender.health < 0){
+                        defender.health = 0;
+                    }
                     System.out.println("Hit for " + dmgRoll);
                     System.out.println("Defender's health " + defender.getHealth());
                     kb.nextLine();
