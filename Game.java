@@ -141,11 +141,16 @@ public class Game
                         }
                         else
                         {
-                                System.out.println("Would you like to add this item to your inventory?");
-                            if (input.nextLine().toLowerCase().equals("yes"))
+                            while(!(input.nextLine().toLowerCase().equals("yes")) && !(input.nextLine().toLowerCase().equals("no")))
                             {
-                                player.addToInventory(droppedItem.value, droppedItem);
-                                System.out.println("You added a " + droppedItem.value + " to your inventory\n");
+                                System.out.println("Would you like to add this item to your inventory?");
+                                if (input.nextLine().toLowerCase().equals("yes"))
+                                {
+                                    player.addToInventory(droppedItem.value, droppedItem);
+                                    System.out.println("You added a " + droppedItem.value + " to your inventory\n");
+                                }
+                                else if(input.nextLine().toLowerCase().equals("no"));
+                                else System.out.println("Please choose a valid option");
                             }
                         }
                     }
