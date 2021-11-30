@@ -114,7 +114,7 @@ public class Game
     public void PlayGame()
     {
         boolean playTheGame = true;
-        String userInput = null;
+        String userInput = "";
         do{
             System.out.println("\n" + player.getCurrentLocation().getLocationName());
             System.out.println("\n" + player.getCurrentLocation().getLocationDescription());
@@ -161,22 +161,25 @@ public class Game
             {
                 System.out.println("Congratulations! You have defeated all of the monster in the " + player.getCurrentLocation().getLocationName() + ". You will now move on to the next location.");
                 player.setCurrentLocation(gameMap.get(1));
-
+                SaveGamePrompt();
             }
             else if(player.getCurrentLocation().getLocationName().equals("Desert"))
             {
                 System.out.println("Congratulations! You have defeated all of the monster in the " + player.getCurrentLocation().getLocationName() + ". You will now move on to the next location.");
                 player.setCurrentLocation(gameMap.get(2));
+                SaveGamePrompt();
             }
             else if(player.getCurrentLocation().getLocationName().equals("Cave"))
             {
                 System.out.println("Congratulations! You have defeated all of the monster in the " + player.getCurrentLocation().getLocationName() + ". You will now move on to the next location.");
                 player.setCurrentLocation(gameMap.get(3));
+                SaveGamePrompt();
             }
             else if(player.getCurrentLocation().getLocationName().equals("Castle"))
             {
                 System.out.println("Congratulations! You have defeated all of the monster in the " + player.getCurrentLocation().getLocationName() + ". You will now move on to the next location.");
                 player.setCurrentLocation(gameMap.get(4));
+                SaveGamePrompt();
             }
             else
             {
@@ -201,6 +204,28 @@ public class Game
 
             }
         }while(playTheGame);
+    }
+
+    public void SaveGamePrompt()
+    {
+        String userInput = "";
+        while(!(userInput.equals("yes") && !(userInput.equals("no"))))
+        {
+            System.out.println("Would you like to save your game yes or no?");
+            if (input.nextLine().toLowerCase().equals("yes"))
+            {
+                WriteFile.SavePlayer(player);
+                System.out.println("You may not close the game or keep playing");
+            }
+            else if(input.nextLine().toLowerCase().equals("no"))
+            {
+                System.out.println("Your game has not been saved");
+            }
+            else
+            {
+                System.out.println("Please choose a valid option");
+            }
+        }
     }
 
     public void Respawn()
