@@ -26,6 +26,7 @@ public class Monster extends Entity implements Damage
     protected int attackBoost;
     protected int defenseBoost;
     protected ItemType item;
+    protected boolean alive;
 
     /**
      * Method Name: Monster<br>
@@ -44,6 +45,7 @@ public class Monster extends Entity implements Damage
     {
         super(hp, def);
         this.enemyType = enemyType;
+        alive = true;
     }
 
     /**
@@ -149,5 +151,15 @@ public class Monster extends Entity implements Damage
             }
         }
         return monsterItem;
+    }
+    
+    public boolean isAlive()
+    {
+        return alive;
+    }
+
+    public void setAlive(boolean alive)
+    {
+        this.alive = alive;
     }
 }
