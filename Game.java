@@ -149,7 +149,7 @@ public class Game
                             }
                         }
                     }
-                    //player.getCurrentLocation().removeMonster(monster);
+                    player.getCurrentLocation().removeMonster(monster);
                 }
                 else
                 {
