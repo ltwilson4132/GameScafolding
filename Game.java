@@ -212,12 +212,13 @@ public class Game
         while(!(userInput.equals("yes") && !(userInput.equals("no"))))
         {
             System.out.println("Would you like to save your game yes or no?");
-            if (input.nextLine().toLowerCase().equals("yes"))
+            userInput = input.nextLine().toLowerCase();
+            if (userInput.equals("yes"))
             {
                 WriteFile.SavePlayer(player);
                 System.out.println("You may not close the game or keep playing");
             }
-            else if(input.nextLine().toLowerCase().equals("no"))
+            else if(userInput.equals("no"))
             {
                 System.out.println("Your game has not been saved");
             }
