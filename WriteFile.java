@@ -22,31 +22,31 @@
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class WriteFile
 {
     public static void SavePlayer(Character player)
     {
         //Writes the info of the player's character to a text file to save the game.
-        try(FileWriter savePlayer = new FileWriter("SavedPlayer.txt"))
-        {
+        try(FileWriter savePlayer = new FileWriter("SavedPlayer.txt");) {
             String temp = "";
             temp += player.getName() + ",";
             temp += player.getType().value + ",";
             temp += player.getHealth() + ",";
             temp += player.getDefense() + ",";
             temp += player.getCurrentLocation().getLocationName() + ",";
-            temp += player.getAttackBoost() + ",";
-            temp += player.getDefenseBoost() + ",";
-            for (String name:player.cInventory.keySet())
+            for (String name : player.cInventory.keySet())
             {
                 temp += name + ",";
             }
+            temp += player.getAttackBoost() + ",";
+            temp += player.getDefenseBoost();
             savePlayer.write(temp);
             System.out.println("Game Saved");
         } catch (IOException e) {
             System.out.println("Could Not Save Game");
-            e.printStackTrace();
         }
     }
 }
