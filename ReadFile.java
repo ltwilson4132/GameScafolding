@@ -109,25 +109,25 @@ public class ReadFile
      * @param locations
      *
      */
-    public static Character loadPlayer(ArrayList<Location> locations) throws FileNotFoundException {
+    public static void loadPlayer(ArrayList<Location> locations, Character player) throws FileNotFoundException {
         String entry;
         try (BufferedReader playerReader = new BufferedReader(new FileReader("SavedPlayer.txt")))
         {
             entry = playerReader.readLine();
             String[] playerInfo = entry.split(",");
-            String name = playerInfo[0];
-            CharacterType type;
-            if(playerInfo[1].equals("Archer"))
+            player.setName(playerInfo[0]);
+            if(playerInfo[1].equals("Archer")) //sets character type to Archer if player is Archer
             {
-                type = CharacterType.ARCHER;
-            } else if(playerInfo[1].equals("Knight")) {
-                type = CharacterType.KNIGHT;
-            } else {
-                type = CharacterType.WIZARD;
+                player.setType(CharacterType.ARCHER);
+            } else if(playerInfo[1].equals("Knight")) //sets character type to Knight if player is Knight
+            {
+                player.setType(CharacterType.KNIGHT);
+            } else // sets character type to Wizard if not Archer or Knight
+            {
+                player.setType(CharacterType.WIZARD);
             }
-            int health = Integer.parseInt(playerInfo[2]);
-            int defense = Integer.parseInt(playerInfo[3]);
-            Character player = new Character(name, type, health, defense);
+            player.setHealth(Integer.parseInt(playerInfo[2]));
+            player.setDefense(Integer.parseInt(playerInfo[3]));
             for (Location location: locations)
             {
                 if(location.getLocationName().equals(playerInfo[4])){
@@ -136,12 +136,25 @@ public class ReadFile
             }
             player.setAttackBoost(Integer.parseInt(playerInfo[5]));
             player.setDefenseBoost(Integer.parseInt(playerInfo[6]));
-            player.
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
+            for(int i = 7; i < playerInfo.length; i++) // if we have no items length will be 7, if we have 1 item length will be 8, if 2 items length will be 9, and if 3 items length will be 10
+            {
+                if(playerInfo[i].equals("Healing Potion"))
+                {
+                    player.addToInventory("Healing Potion", ItemType.HEALING);
+                } else if (playerInfo[i].equals("Attack Boost"))
+                {
+                    player.addToInventory("Attack Boost", ItemType.ATTACK_BOOST);
+                } else if (playerInfo[i].equals("Defense Boost"))
+                {
+                    player.addToInventory("Defense Boost", ItemType.DEFENSE_BOOST);
+                }
+            }
         }
+        catch (IOException exception)
+        {
+            exception.printStackTrace();
+        }
+
     }
 
 }
