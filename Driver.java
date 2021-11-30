@@ -7,7 +7,7 @@ public class Driver
         Game myGame = new Game();
         Scanner input = new Scanner(System.in);
         String userInput = "";
-        while(!(userInput.equals("new game") && !(userInput.equals("load game"))))
+        while(!(userInput.equals("new game")) && !(userInput.equals("load game")))
         {
             System.out.println("Would you like to start a new game or load a game?");
             userInput = input.nextLine().toLowerCase();
@@ -19,6 +19,7 @@ public class Driver
             {
                 Character player = new Character();
                 ReadFile.loadPlayer(myGame.getGameMap(), player);
+                myGame.setPlayer(player);
             }
             else
             {

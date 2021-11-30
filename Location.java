@@ -1,9 +1,31 @@
+/*
+ * -------------------------------------------------------------------------------
+ * File name: Location.java
+ * Project name: Semester Project
+ * -------------------------------------------------------------------------------
+ * Author's name and email: Logan Wilson wilsonlt@etsu.edu
+ * Course-Section: CSCI-1250-900
+ * Creation Date: Nov 12, 2021
+ * Last modified: Logan Wilson wilsonlt@etsu.edu Nov 29, 2021
+ * -------------------------------------------------------------------------------
+ */
+
+/*
+ * Class Name: Location<br>
+ * Class Purpose:  The class is used to define a location object used in the game. Has name, description, size, and
+ * an ArrayList of Monsters<br>
+ *
+ * <hr>
+ * Date created: Nov 14, 2021<br>
+ * Last modified: Nov 29, 2021
+ * @author Logan Wilson
+ */
 import java.util.ArrayList;
 
 public class Location
 {
     private String locationName, locationDescription;
-    final int size; //How many enemies it can hold
+    final int size; //How many enemies it can hold. Final so that it won't change
     private ArrayList<Monster> monsters;
 
     public Location(String locationName, String locationDescription, int size)
@@ -11,9 +33,8 @@ public class Location
         this.locationName = locationName;
         this.locationDescription = locationDescription;
         this.size = size;
-        monsters = new ArrayList<>(size);
-        //Equals max size that location can hold
-        //Generates random number of Monsters between 0 and the max size of the location and adds them to the ArrayList
+        monsters = new ArrayList<>(size);//Equals max size that location can hold
+
     }
 
     public String getLocationName()
@@ -41,12 +62,21 @@ public class Location
         return size;
     }
 
-    public Monster GetMonster(int index)
-    {
-        //Outputs String representing all monster at location.
-        return monsters.get(index);
-    }
-
+    /*
+     * Method Name: getMonsters<br>
+     * Method Purpose: This method returns a string representing all the monsters in the monster ArrayList<br>
+     *
+     * <hr>
+     * Date created: Nov 14, 2021<br>
+     * Date last modified: Nov 29, 2021<br>
+     *
+     * <hr>
+     * Notes on specifications, special algorithms, and assumptions: N/A
+     *
+     * <hr>
+     * @param none
+     * @returns String that represents all the monster in location
+     */
     public String getMonsters()
     {
         String monsterList = "";
@@ -60,6 +90,7 @@ public class Location
         return monsterList;
     }
 
+
     public ArrayList<Monster> getMonstersArray()
     {
         return monsters;
@@ -71,11 +102,27 @@ public class Location
         monsters.add(monster);
     }
 
+    /*
+     * Method Name: removeMonster<br>
+     * Method Purpose: This method sets the monster passed in alive attribute to false.<br>
+     *
+     * <hr>
+     * Date created: Nov 14, 2021<br>
+     * Date last modified: Nov 29, 2021<br>
+     *
+     * <hr>
+     * Notes on specifications, special algorithms, and assumptions: N/A
+     *
+     * <hr>
+     * @param monster: the monster to change the alive attribute of.
+     * @returns N/A
+     */
     public void removeMonster(Monster monster)
     {
-        //Removes a monster from the ArrayList when one is killed
+        //Sets a monsters Alive attribute to false
         monster.setAlive(false);
     }
+
 
     public void ClearMonsters()
     {
